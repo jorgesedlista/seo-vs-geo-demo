@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO vs GEO — Content Optimization Comparison</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FFFFFF;
+            --bg-alt: #F4F6F5;
+            --green-dark: #31694B;
+            --green-deep: #0E3A2F;
+            --mint: #78FAAE;
+            --mint-hover: #72E3A1;
+            --text: #161718;
+            --text-sec: #464748;
+            --text-ter: #7C7D7E;
+            --border: #E4E4E4;
+            --seo-color: #31694B;
+            --geo-color: #0E3A2F;
+            --hotspot-seo: rgba(49,105,75,0.10);
+            --hotspot-geo: rgba(14,58,47,0.10);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            letter-spacing: 0.02em;
+        }
+
+        /* ── TOP BAR ── */
+        .top-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            height: 64px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .top-bar-logo {
+            height: 34px;
+            border-radius: 6px;
+        }
+
+        .top-bar-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--green-dark);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .top-bar-subtitle {
+            font-size: 12px;
+            color: var(--text-ter);
+            font-weight: 300;
+        }
+
+        .top-bar-center {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .top-bar-center .pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 18px;
+            border-radius: 1000px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .pill-seo {
+            background: var(--mint);
+            color: var(--text);
+        }
+
+        .pill-geo {
+            background: var(--green-dark);
+            color: #fff;
+        }
+
+        .top-bar-center .vs {
+            color: var(--text-ter);
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--text-sec);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.seo { background: var(--mint); }
+        .legend-dot.geo { background: var(--green-dark); }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--green-dark);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 8px 20px;
+            border: 2px solid var(--text);
+            border-radius: 1000px;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .back-link:hover {
+            background: var(--text);
+            color: #fff;
+        }
+
+        /* ── SPLIT LAYOUT ── */
+        .split-container {
+            display: flex;
+            height: 100vh;
+            padding-top: 64px;
+        }
+
+        .panel {
+            flex: 1;
+            overflow-y: auto;
+            padding: 48px 40px 80px;
+            scroll-behavior: smooth;
+        }
+
+        .panel::-webkit-scrollbar { width: 4px; }
+        .panel::-webkit-scrollbar-track { background: transparent; }
+        .panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+        .panel::-webkit-scrollbar-thumb:hover { background: var(--text-ter); }
+
+        .panel-seo {
+            background: var(--bg);
+            border-right: 1px solid var(--border);
+        }
+
+        .panel-geo {
+            background: var(--bg-alt);
+        }
+
+        /* ── DIVIDER ── */
+        .divider {
+            position: fixed;
+            top: 64px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--mint), var(--green-dark));
+            z-index: 50;
+            opacity: 0.5;
+        }
+
+        /* ── PANEL HEADER ── */
+        .panel-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 1000px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .panel-seo .panel-badge {
+            background: var(--mint);
+            color: var(--text);
+        }
+
+        .panel-geo .panel-badge {
+            background: var(--green-dark);
+            color: #fff;
+        }
+
+        .panel-desc {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--text-sec);
+            line-height: 1.7;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* ── ARTICLE CONTENT ── */
+        .article {
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+
+        .article h1 {
+            font-size: clamp(24px, 2.5vw, 32px);
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+            line-height: 1.25;
+        }
+
+        .article .meta {
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--text-ter);
+            margin-bottom: 28px;
+        }
+
+        .article h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin: 40px 0 16px;
+            padding-top: 8px;
+        }
+
+        .panel-seo .article h2 { border-left: 3px solid var(--mint); padding-left: 12px; }
+        .panel-geo .article h2 { border-left: 3px solid var(--green-dark); padding-left: 12px; }
+
+        .article h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin: 24px 0 8px;
+        }
+
+        .article p {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--text-sec);
+            margin-bottom: 16px;
+        }
+
+        .article strong {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .article ul, .article ol {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--text-sec);
+            margin: 0 0 16px 20px;
+        }
+
+        .article li { margin-bottom: 8px; }
+
+        .article table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+
+        .article th {
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-ter);
+            border-bottom: 2px solid var(--border);
+        }
+
+        .article td {
+            padding: 12px 14px;
+            color: var(--text-sec);
+            font-weight: 300;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article blockquote {
+            border-left: 3px solid var(--green-dark);
+            padding: 16px 20px;
+            margin: 24px 0;
+            background: rgba(49,105,75,0.04);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--text-sec);
+        }
+
+        .article .faq-item {
+            margin-bottom: 20px;
+            padding: 16px 20px;
+            background: var(--bg-alt);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .panel-geo .article .faq-item {
+            background: var(--bg);
+        }
+
+        .article .faq-q {
+            font-weight: 700;
+            color: var(--text);
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .article .faq-a {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--text-sec);
+        }
+
+        /* ── HERO BANNER ── */
+        .hero-banner {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 24px 0;
+            position: relative;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 40%, #a5d6a7 100%);
+            border: 1px solid var(--border);
+        }
+
+        .hero-banner svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hero-banner figcaption {
+            padding: 10px 16px;
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--text-ter);
+            background: var(--bg-alt);
+            border-top: 1px solid var(--border);
+        }
+
+        .panel-geo .hero-banner figcaption {
+            background: var(--bg);
+        }
+
+        .hero-banner figcaption strong {
+            font-weight: 600;
+            color: var(--text-sec);
+        }
+
+        /* ── CODE BLOCK ── */
+        .code-block {
+            background: var(--green-deep);
+            border-radius: 8px;
+            padding: 16px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: rgba(255,255,255,0.75);
+            overflow-x: auto;
+            margin: 16px 0;
+            line-height: 1.6;
+        }
+
+        /* ── HOTSPOT ── */
+        .hotspot {
+            position: relative;
+            display: inline;
+            cursor: help;
+            border-bottom: 2px dashed;
+            transition: background 0.2s;
+        }
+
+        .panel-seo .hotspot {
+            border-color: rgba(120,250,174,0.6);
+            background: rgba(120,250,174,0.10);
+        }
+
+        .panel-geo .hotspot {
+            border-color: rgba(49,105,75,0.5);
+            background: rgba(49,105,75,0.08);
+        }
+
+        .hotspot:hover { filter: brightness(0.95); }
+
+        .hotspot-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 800;
+            margin-left: 4px;
+            vertical-align: middle;
+            position: relative;
+            top: -2px;
+            cursor: help;
+        }
+
+        .panel-seo .hotspot-num {
+            background: var(--mint);
+            color: var(--green-deep);
+            animation: pulse-seo 2.5s ease-in-out infinite;
+        }
+
+        .panel-geo .hotspot-num {
+            background: var(--green-dark);
+            color: #fff;
+            animation: pulse-geo 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-seo {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(120,250,174,0.5); }
+            50% { box-shadow: 0 0 0 6px rgba(120,250,174,0); }
+        }
+
+        @keyframes pulse-geo {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(49,105,75,0.5); }
+            50% { box-shadow: 0 0 0 6px rgba(49,105,75,0); }
+        }
+
+        /* ── TOOLTIP ── */
+        .tooltip {
+            position: fixed;
+            z-index: 200;
+            width: 360px;
+            padding: 20px 24px;
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.25s, transform 0.25s cubic-bezier(0.4,0,0.2,1);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .tooltip-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tooltip-label .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .tooltip.seo-tip .tooltip-label { color: var(--green-dark); }
+        .tooltip.seo-tip .tooltip-label .dot { background: var(--mint); }
+        .tooltip.geo-tip .tooltip-label { color: var(--green-deep); }
+        .tooltip.geo-tip .tooltip-label .dot { background: var(--green-dark); }
+
+        .tooltip-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .tooltip-body {
+            color: var(--text-sec);
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        .tooltip-body strong {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .tooltip-vs {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+        .tooltip-vs .vs-label {
+            font-weight: 700;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+
+        .tooltip.seo-tip .vs-label { color: var(--green-deep); }
+        .tooltip.geo-tip .vs-label { color: var(--green-dark); }
+
+        .tooltip-vs p {
+            color: var(--text-ter);
+            font-size: 12px;
+            font-weight: 300;
+            margin: 0;
+        }
+
+        /* ── OVERLAY / SPOTLIGHT ── */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 150;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .hotspot.spotlight,
+        .hotspot-num.spotlight {
+            position: relative;
+            z-index: 160;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 0 0 6px rgba(255,255,255,0.5), 0 0 30px rgba(255,255,255,0.3);
+        }
+
+        .hotspot-num.spotlight {
+            border-radius: 50%;
+        }
+
+        .tooltip.visible.spotlight-tip {
+            z-index: 210;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .top-bar-center { display: none; }
+            .top-bar-right .legend-item { display: none; }
+            .panel { padding: 32px 24px 60px; }
+            .tooltip { width: 300px; }
+        }
+
+        @media (max-width: 600px) {
+            .split-container {
+                flex-direction: column;
+                overflow-y: auto;
+            }
+            .panel {
+                overflow-y: visible;
+                flex: none;
+            }
+            .panel-seo {
+                border-right: none;
+                border-bottom: 3px solid var(--mint);
+            }
+            .divider { display: none; }
+            .top-bar { padding: 0 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <nav class="top-bar">
+        <div class="top-bar-left">
+        </div>
+        <div class="top-bar-center">
+            <span class="pill pill-seo">SEO</span>
+            <span class="vs">vs</span>
+            <span class="pill pill-geo">GEO</span>
+        </div>
+        <div class="top-bar-right">
+            <div class="legend-item">
+                <span class="legend-dot seo"></span>
+                SEO hotspot
+            </div>
+            <div class="legend-item">
+                <span class="legend-dot geo"></span>
+                GEO hotspot
+            </div>
+            <a href="../" class="back-link">&larr; Back</a>
+        </div>
+    </nav>
+
+    <!-- GRADIENT DIVIDER -->
+    <div class="divider"></div>
+
+    <!-- SPLIT PANELS -->
+    <div class="split-container">
+
+        <!-- ═══════════════ SEO PANEL ═══════════════ -->
+        <div class="panel panel-seo">
+            <div class="panel-header">
+                <div class="panel-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    Search Engine Optimization
+                </div>
+                <p class="panel-desc">Content optimized for search engines (Google, Bing). The goal is to rank high in search results (SERP). Hover over the highlighted hotspots for explanations.</p>
+            </div>
+
+            <div class="article">
+
+                <h1>
+                    <span class="hotspot" data-tooltip="seo-h1">Škoda Kodiaq 2025 — Price, Specs, Review & Comparison</span><span class="hotspot-num" data-tooltip="seo-h1">1</span>
+                </h1>
+                <p class="meta">Updated: January 2025 &middot; Read time: 8 min</p>
+
+                <p>Looking for a <span class="hotspot" data-tooltip="seo-keywords">new family SUV</span><span class="hotspot-num" data-tooltip="seo-keywords">2</span>? The Škoda Kodiaq is one of the best-selling midsize SUVs in Europe. In this article, we cover pricing, engines, specs, and compare it to the competition.</p>
+
+                <figure class="hero-banner">
+                    <svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="sky-seo" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#dcedc8"/>
+                                <stop offset="100%" style="stop-color:#c5e1a5"/>
+                            </linearGradient>
+                            <linearGradient id="road-seo" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#78909c"/>
+                                <stop offset="100%" style="stop-color:#546e7a"/>
+                            </linearGradient>
+                            <linearGradient id="body-seo" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fafafa"/>
+                                <stop offset="60%" style="stop-color:#e0e0e0"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Background -->
+                        <rect width="800" height="360" fill="url(#sky-seo)"/>
+                        <!-- Mountains -->
+                        <polygon points="0,220 120,120 240,200 360,100 480,180 600,90 720,170 800,130 800,260 0,260" fill="#a5d6a7" opacity="0.5"/>
+                        <polygon points="0,240 160,160 300,220 450,140 600,200 750,150 800,180 800,260 0,260" fill="#81c784" opacity="0.4"/>
+                        <!-- Road -->
+                        <rect x="0" y="260" width="800" height="100" fill="url(#road-seo)"/>
+                        <rect x="0" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="90" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="180" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="270" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="360" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="450" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="540" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="630" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="720" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <!-- Car body -->
+                        <g transform="translate(200, 170)">
+                            <!-- Shadow -->
+                            <ellipse cx="200" cy="105" rx="180" ry="12" fill="rgba(0,0,0,0.12)"/>
+                            <!-- Lower body -->
+                            <path d="M60,55 L55,80 Q55,90 65,90 L335,90 Q345,90 345,80 L340,55 Z" fill="url(#body-seo)" stroke="#bdbdbd" stroke-width="1"/>
+                            <!-- Upper body / cabin -->
+                            <path d="M120,55 L145,15 Q150,8 160,8 L280,8 Q295,8 300,18 L340,55 Z" fill="url(#body-seo)" stroke="#bdbdbd" stroke-width="1"/>
+                            <!-- Windows -->
+                            <path d="M150,52 L170,18 Q173,13 178,13 L215,13 L215,52 Z" fill="#b2dfdb" stroke="#80cbc4" stroke-width="0.5" opacity="0.8"/>
+                            <path d="M220,13 L220,52 L290,52 L310,18 Q308,13 302,13 Z" fill="#b2dfdb" stroke="#80cbc4" stroke-width="0.5" opacity="0.8"/>
+                            <!-- B-pillar -->
+                            <rect x="215" y="12" width="5" height="41" rx="1" fill="#9e9e9e"/>
+                            <!-- Door line -->
+                            <line x1="215" y1="55" x2="215" y2="88" stroke="#bdbdbd" stroke-width="1"/>
+                            <!-- Headlight -->
+                            <rect x="335" y="58" width="12" height="8" rx="3" fill="#fff9c4" stroke="#f9a825" stroke-width="0.5"/>
+                            <!-- Taillight -->
+                            <rect x="55" y="58" width="8" height="8" rx="2" fill="#ef5350" opacity="0.8"/>
+                            <!-- Grille -->
+                            <rect x="335" y="70" width="10" height="16" rx="2" fill="#424242"/>
+                            <line x1="337" y1="74" x2="343" y2="74" stroke="#616161" stroke-width="0.5"/>
+                            <line x1="337" y1="78" x2="343" y2="78" stroke="#616161" stroke-width="0.5"/>
+                            <line x1="337" y1="82" x2="343" y2="82" stroke="#616161" stroke-width="0.5"/>
+                            <!-- Door handle -->
+                            <rect x="170" y="62" width="16" height="3" rx="1.5" fill="#9e9e9e"/>
+                            <rect x="260" y="62" width="16" height="3" rx="1.5" fill="#9e9e9e"/>
+                            <!-- Roof rails -->
+                            <line x1="145" y1="8" x2="295" y2="8" stroke="#9e9e9e" stroke-width="2" stroke-linecap="round"/>
+                            <!-- Front wheel -->
+                            <circle cx="300" cy="90" r="26" fill="#37474f"/>
+                            <circle cx="300" cy="90" r="22" fill="#455a64"/>
+                            <circle cx="300" cy="90" r="10" fill="#78909c"/>
+                            <circle cx="300" cy="90" r="6" fill="#546e7a"/>
+                            <!-- Rear wheel -->
+                            <circle cx="110" cy="90" r="26" fill="#37474f"/>
+                            <circle cx="110" cy="90" r="22" fill="#455a64"/>
+                            <circle cx="110" cy="90" r="10" fill="#78909c"/>
+                            <circle cx="110" cy="90" r="6" fill="#546e7a"/>
+                            <!-- Škoda badge -->
+                            <circle cx="340" cy="72" r="0" fill="#31694B"/>
+                        </g>
+                        <!-- Brand text overlay -->
+                        <text x="400" y="340" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="rgba(0,0,0,0.2)" letter-spacing="0.1em">ŠKODA KODIAQ 2025</text>
+                    </svg>
+                    <div style="padding:8px 16px; font-size:11px; color:var(--text-ter); font-weight:300; background:var(--bg-alt); border-top:1px solid var(--border);">
+                        <span class="hotspot" data-tooltip="seo-img">alt="Škoda Kodiaq 2025 SUV white side view on road in nature — new family car"</span><span class="hotspot-num" data-tooltip="seo-img">3</span>
+                    </div>
+                </figure>
+
+                <h2><span class="hotspot" data-tooltip="seo-h2">Škoda Kodiaq 2025 Price — How Much Does It Cost?</span><span class="hotspot-num" data-tooltip="seo-h2">4</span></h2>
+
+                <p>The base price of the Škoda Kodiaq starts at <strong>€34,990</strong> for the Selection trim with the 1.5 TSI engine (110 kW). The best-selling configuration with the 2.0 TDI and AWD comes in at approximately €44,990.</p>
+
+                <table>
+                    <tr><th>Trim</th><th>Engine</th><th>Price from</th></tr>
+                    <tr><td>Selection</td><td>1.5 TSI / 110 kW</td><td>€34,990</td></tr>
+                    <tr><td>Sportline</td><td>2.0 TSI / 150 kW</td><td>€40,990</td></tr>
+                    <tr><td>L&K</td><td>2.0 TDI / 142 kW AWD</td><td>€48,990</td></tr>
+                    <tr><td>RS</td><td>2.0 TSI / 195 kW AWD</td><td>€54,990</td></tr>
+                </table>
+
+                <h2>Engines & Fuel Economy</h2>
+
+                <p>The Kodiaq offers both petrol and <span class="hotspot" data-tooltip="seo-longtail">diesel engines with DSG automatic transmission</span><span class="hotspot-num" data-tooltip="seo-longtail">5</span>. Combined fuel consumption ranges from 5.8 l/100 km (diesel) to 7.9 l/100 km (RS petrol).</p>
+
+                <ul>
+                    <li><strong>1.5 TSI (110 kW)</strong> — ideal for city and suburban commuting</li>
+                    <li><strong>2.0 TSI (150 kW)</strong> — dynamic petrol with DSG</li>
+                    <li><strong>2.0 TDI (142 kW)</strong> — most fuel-efficient option for highway driving</li>
+                    <li><strong>2.0 TSI RS (195 kW)</strong> — sport version, 0–100 km/h in 6.5 s</li>
+                </ul>
+
+                <h2>Equipment & Interior</h2>
+
+                <p>Standard equipment includes a 10.25" digital instrument cluster, 13" infotainment display, LED Matrix headlights, and tri-zone automatic climate control. <span class="hotspot" data-tooltip="seo-internal-link">The L&K trim adds leather interior and ventilated seats</span><span class="hotspot-num" data-tooltip="seo-internal-link">6</span>.</p>
+
+                <h2><span class="hotspot" data-tooltip="seo-vs-heading">Škoda Kodiaq vs Hyundai Tucson vs VW Tiguan — Comparison</span><span class="hotspot-num" data-tooltip="seo-vs-heading">7</span></h2>
+
+                <table>
+                    <tr><th>Parameter</th><th>Kodiaq</th><th>Tucson</th><th>Tiguan</th></tr>
+                    <tr><td>Length</td><td>4,758 mm</td><td>4,630 mm</td><td>4,534 mm</td></tr>
+                    <tr><td>Cargo space</td><td>910 l</td><td>620 l</td><td>652 l</td></tr>
+                    <tr><td>Price from</td><td>€34,990</td><td>€32,490</td><td>€37,990</td></tr>
+                    <tr><td>Warranty</td><td>2 years</td><td>5 years</td><td>2 years</td></tr>
+                </table>
+
+                <p>The Kodiaq stands out for space — offering up to <strong>7 seats</strong> and the largest cargo area in its class.</p>
+
+                <h2><span class="hotspot" data-tooltip="seo-faq">Frequently Asked Questions (FAQ)</span><span class="hotspot-num" data-tooltip="seo-faq">8</span></h2>
+
+                <div class="faq-item">
+                    <p class="faq-q">How much does the Škoda Kodiaq 2025 cost?</p>
+                    <p class="faq-a">The base price starts at €34,990 for the Selection 1.5 TSI trim.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-q">Does the Kodiaq have AWD?</p>
+                    <p class="faq-a">Yes, all-wheel drive is available on 2.0 TDI and 2.0 TSI RS trims.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-q">What is the Kodiaq diesel fuel consumption?</p>
+                    <p class="faq-a">The combined fuel consumption of the 2.0 TDI is 5.8 l/100 km (WLTP).</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-q">Does the Škoda Kodiaq have 7 seats?</p>
+                    <p class="faq-a">Yes, a third row of seats is available as an optional extra.</p>
+                </div>
+
+                <h2><span class="hotspot" data-tooltip="seo-schema">Schema Markup (Structured Data)</span><span class="hotspot-num" data-tooltip="seo-schema">9</span></h2>
+
+                <div class="code-block">&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Škoda Kodiaq 2025",
+  "brand": { "@type": "Brand", "name": "Škoda" },
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "899900",
+    "highPrice": "1399900",
+    "priceCurrency": "CZK"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.6",
+    "reviewCount": "328"
+  }
+}
+&lt;/script&gt;</div>
+
+                <h2><span class="hotspot" data-tooltip="seo-url">URL & Meta Tags</span><span class="hotspot-num" data-tooltip="seo-url">10</span></h2>
+
+                <div class="code-block">URL: /cars/skoda-kodiaq-2025-price-review/
+
+&lt;title&gt;Škoda Kodiaq 2025 — Price from €34,990, Review, Comparison&lt;/title&gt;
+&lt;meta name="description" content="Complete Škoda Kodiaq 2025 overview. Price from €34,990, engines 1.5 TSI to 2.0 TSI RS, specs, fuel economy & comparison with Tucson and Tiguan."&gt;</div>
+
+            </div>
+        </div>
+
+        <!-- ═══════════════ GEO PANEL ═══════════════ -->
+        <div class="panel panel-geo">
+            <div class="panel-header">
+                <div class="panel-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    Generative Engine Optimization
+                </div>
+                <p class="panel-desc">Content optimized for AI answers (ChatGPT, Perplexity, Gemini, Claude). The goal is to have AI models cite and use your content. Hover over the highlighted hotspots.</p>
+            </div>
+
+            <div class="article">
+
+                <h1>
+                    <span class="hotspot" data-tooltip="geo-h1">Škoda Kodiaq — Complete Buyer's Guide (2025)</span><span class="hotspot-num" data-tooltip="geo-h1">1</span>
+                </h1>
+                <p class="meta">
+                    <span class="hotspot" data-tooltip="geo-author">Author: Martin Novák, MSc, automotive analyst &middot; Sources: Škoda Auto, Euro NCAP, ADAC</span><span class="hotspot-num" data-tooltip="geo-author">2</span>
+                </p>
+
+                <p><span class="hotspot" data-tooltip="geo-opening">The Škoda Kodiaq is a midsize SUV manufactured by Czech automaker Škoda Auto since 2016. The second generation (NS7) was unveiled in October 2023 on the MQB-evo platform and went on sale in Q1 2024.</span><span class="hotspot-num" data-tooltip="geo-opening">3</span> It is the brand's flagship model in the SUV segment.</p>
+
+                <figure class="hero-banner">
+                    <svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="sky-geo" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#dcedc8"/>
+                                <stop offset="100%" style="stop-color:#c5e1a5"/>
+                            </linearGradient>
+                            <linearGradient id="body-geo" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fafafa"/>
+                                <stop offset="60%" style="stop-color:#e0e0e0"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="800" height="360" fill="url(#sky-geo)"/>
+                        <polygon points="0,220 120,120 240,200 360,100 480,180 600,90 720,170 800,130 800,260 0,260" fill="#a5d6a7" opacity="0.5"/>
+                        <polygon points="0,240 160,160 300,220 450,140 600,200 750,150 800,180 800,260 0,260" fill="#81c784" opacity="0.4"/>
+                        <rect x="0" y="260" width="800" height="100" fill="#78909c"/>
+                        <rect x="0" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="90" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="180" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="270" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="360" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="450" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="540" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="630" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <rect x="720" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
+                        <g transform="translate(200, 170)">
+                            <ellipse cx="200" cy="105" rx="180" ry="12" fill="rgba(0,0,0,0.12)"/>
+                            <path d="M60,55 L55,80 Q55,90 65,90 L335,90 Q345,90 345,80 L340,55 Z" fill="url(#body-geo)" stroke="#bdbdbd" stroke-width="1"/>
+                            <path d="M120,55 L145,15 Q150,8 160,8 L280,8 Q295,8 300,18 L340,55 Z" fill="url(#body-geo)" stroke="#bdbdbd" stroke-width="1"/>
+                            <path d="M150,52 L170,18 Q173,13 178,13 L215,13 L215,52 Z" fill="#b2dfdb" stroke="#80cbc4" stroke-width="0.5" opacity="0.8"/>
+                            <path d="M220,13 L220,52 L290,52 L310,18 Q308,13 302,13 Z" fill="#b2dfdb" stroke="#80cbc4" stroke-width="0.5" opacity="0.8"/>
+                            <rect x="215" y="12" width="5" height="41" rx="1" fill="#9e9e9e"/>
+                            <line x1="215" y1="55" x2="215" y2="88" stroke="#bdbdbd" stroke-width="1"/>
+                            <rect x="335" y="58" width="12" height="8" rx="3" fill="#fff9c4" stroke="#f9a825" stroke-width="0.5"/>
+                            <rect x="55" y="58" width="8" height="8" rx="2" fill="#ef5350" opacity="0.8"/>
+                            <rect x="335" y="70" width="10" height="16" rx="2" fill="#424242"/>
+                            <rect x="170" y="62" width="16" height="3" rx="1.5" fill="#9e9e9e"/>
+                            <rect x="260" y="62" width="16" height="3" rx="1.5" fill="#9e9e9e"/>
+                            <line x1="145" y1="8" x2="295" y2="8" stroke="#9e9e9e" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="300" cy="90" r="26" fill="#37474f"/>
+                            <circle cx="300" cy="90" r="22" fill="#455a64"/>
+                            <circle cx="300" cy="90" r="10" fill="#78909c"/>
+                            <circle cx="300" cy="90" r="6" fill="#546e7a"/>
+                            <circle cx="110" cy="90" r="26" fill="#37474f"/>
+                            <circle cx="110" cy="90" r="22" fill="#455a64"/>
+                            <circle cx="110" cy="90" r="10" fill="#78909c"/>
+                            <circle cx="110" cy="90" r="6" fill="#546e7a"/>
+                        </g>
+                        <text x="400" y="340" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="rgba(0,0,0,0.2)" letter-spacing="0.1em">ŠKODA KODIAQ 2025</text>
+                    </svg>
+                    <figcaption>
+                        <span class="hotspot" data-tooltip="geo-img">Second generation Škoda Kodiaq (NS7), model year 2025. <strong>Source:</strong> Škoda Auto Press, media archive, published October 2023.</span><span class="hotspot-num" data-tooltip="geo-img">4</span>
+                    </figcaption>
+                </figure>
+
+                <h2><span class="hotspot" data-tooltip="geo-h2">How Much Does the Kodiaq Cost and What Affects the Price?</span><span class="hotspot-num" data-tooltip="geo-h2">5</span></h2>
+
+                <p><span class="hotspot" data-tooltip="geo-cite">According to the official Škoda Auto price list effective January 2025, the base Selection trim with the 1.5 TSI engine (110 kW) starts at €34,990.</span><span class="hotspot-num" data-tooltip="geo-cite">6</span> The price depends on the chosen engine, trim level, and drivetrain:</p>
+
+                <table>
+                    <tr><th>Trim</th><th>Engine</th><th>Price from</th><th>Best for</th></tr>
+                    <tr><td>Selection</td><td>1.5 TSI / 110 kW</td><td>€34,990</td><td>Budget-conscious families</td></tr>
+                    <tr><td>Sportline</td><td>2.0 TSI / 150 kW</td><td>€40,990</td><td>Drivers who prefer sporty design</td></tr>
+                    <tr><td>L&K</td><td>2.0 TDI / 142 kW AWD</td><td>€48,990</td><td>Buyers who want luxury features</td></tr>
+                    <tr><td>RS</td><td>2.0 TSI / 195 kW AWD</td><td>€54,990</td><td>Performance driving enthusiasts</td></tr>
+                </table>
+
+                <blockquote>
+                    <span class="hotspot" data-tooltip="geo-expert">"The Kodiaq offers the best price-to-space ratio in its class. With a 910-liter cargo area, it surpasses even competitors from a segment above."</span><span class="hotspot-num" data-tooltip="geo-expert">7</span><br>
+                    — Pavel Krejčí, MSc, Editor-in-Chief at Auto.cz
+                </blockquote>
+
+                <h2><span class="hotspot" data-tooltip="geo-context">Engines & Fuel Economy — What Do Independent Tests Say?</span><span class="hotspot-num" data-tooltip="geo-context">8</span></h2>
+
+                <p>The second-generation Kodiaq offers four engine options. <span class="hotspot" data-tooltip="geo-data">According to a test by Germany's ADAC from November 2024, the 2.0 TDI achieved real-world fuel consumption of 6.3 l/100 km in the combined cycle — 0.5 l more than the manufacturer's claim (5.8 l per WLTP).</span><span class="hotspot-num" data-tooltip="geo-data">9</span></p>
+
+                <ul>
+                    <li><strong>1.5 TSI (110 kW)</strong> — entry-level engine, suitable for city and short trips. Real-world consumption ~7.5 l/100 km.</li>
+                    <li><strong>2.0 TSI (150 kW)</strong> — more balanced choice for longer distances. Features a 7-speed DSG.</li>
+                    <li><strong>2.0 TDI (142 kW)</strong> — best value for drivers covering over 20,000 km per year.</li>
+                    <li><strong>2.0 TSI RS (195 kW)</strong> — sport version with progressive steering, 0–100 km/h in 6.5 s.</li>
+                </ul>
+
+                <h2>Safety</h2>
+
+                <p><span class="hotspot" data-tooltip="geo-authority">The Kodiaq received a 5-star Euro NCAP rating (2024) with 92% for adult occupant protection and 89% for child occupant protection. It scored 82% in the safety assist category.</span><span class="hotspot-num" data-tooltip="geo-authority">10</span></p>
+
+                <h2><span class="hotspot" data-tooltip="geo-comparison">How Does the Kodiaq Compare to the Competition?</span><span class="hotspot-num" data-tooltip="geo-comparison">11</span></h2>
+
+                <p>When choosing an SUV in the €35,000–€55,000 price range, buyers most commonly decide between three models:</p>
+
+                <table>
+                    <tr><th>Parameter</th><th>Kodiaq</th><th>Tucson</th><th>Tiguan</th></tr>
+                    <tr><td>Length</td><td>4,758 mm</td><td>4,630 mm</td><td>4,534 mm</td></tr>
+                    <tr><td>Cargo space</td><td>910 l</td><td>620 l</td><td>652 l</td></tr>
+                    <tr><td>Price from</td><td>€34,990</td><td>€32,490</td><td>€37,990</td></tr>
+                    <tr><td>Euro NCAP</td><td>5 stars (2024)</td><td>5 stars (2021)</td><td>5 stars (2024)</td></tr>
+                    <tr><td>Warranty</td><td>2 years</td><td>5 years</td><td>2 years</td></tr>
+                    <tr><td>7 seats</td><td>Yes (optional)</td><td>No</td><td>No</td></tr>
+                </table>
+
+                <p><span class="hotspot" data-tooltip="geo-nuance">The Kodiaq is the clear best choice for families who need maximum space. The Tucson has the advantage of a longer warranty (5 years) and a lower entry price. The Tiguan shares the MQB platform with the Kodiaq but offers a smaller interior for a higher price — its strength is a more premium-feeling cabin.</span><span class="hotspot-num" data-tooltip="geo-nuance">12</span></p>
+
+                <h2><span class="hotspot" data-tooltip="geo-summary">Summary — Who Is the Kodiaq Ideal For?</span><span class="hotspot-num" data-tooltip="geo-summary">13</span></h2>
+
+                <p>The Škoda Kodiaq is the optimal choice for:</p>
+                <ul>
+                    <li><strong>Families with children</strong> — thanks to 7 seats and the largest cargo area in the segment</li>
+                    <li><strong>Highway commuters</strong> — diesel 2.0 TDI with real-world consumption under 6.5 l/100 km</li>
+                    <li><strong>Value-for-money buyers</strong> — more space than the related Tiguan for less money</li>
+                </ul>
+
+                <p>On the other hand, if you prioritize <strong>warranty</strong>, consider the Hyundai Tucson. If you prefer a <strong>premium interior</strong> over space, look at the VW Tiguan.</p>
+
+                <h2><span class="hotspot" data-tooltip="geo-structured">Structured Data for AI</span><span class="hotspot-num" data-tooltip="geo-structured">14</span></h2>
+
+                <div class="code-block">&lt;!-- Machine-readable facts --&gt;
+&lt;div itemscope itemtype="https://schema.org/Car"&gt;
+  &lt;meta itemprop="name" content="Škoda Kodiaq"&gt;
+  &lt;meta itemprop="modelDate" content="2025"&gt;
+  &lt;meta itemprop="manufacturer" content="Škoda Auto"&gt;
+  &lt;meta itemprop="vehicleEngine" content="1.5 TSI, 2.0 TSI, 2.0 TDI"&gt;
+
+  &lt;!-- Explicit claim statements --&gt;
+  &lt;div itemprop="description"&gt;
+    The Škoda Kodiaq is a midsize 7-seat SUV
+    priced from €34,990 (2025).
+    Largest cargo space in class: 910 l.
+    Euro NCAP rating: 5/5 stars (2024).
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- TOOLTIP -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        const tooltips = {
+            'seo-h1': {
+                type: 'seo',
+                title: 'Keyword-Packed H1 Title',
+                body: 'The SEO H1 contains the <strong>exact target keyword</strong> ("Škoda Kodiaq 2025") plus commercially valuable terms ("price", "review", "comparison"). The goal is to match search queries directly in the title.',
+                vs: 'The GEO version uses a more natural title focused on <strong>user intent</strong> ("buyer\'s guide") — AI models understand context and don\'t need exact keyword matches.'
+            },
+            'seo-keywords': {
+                type: 'seo',
+                title: 'Keywords in Body Text',
+                body: 'The SEO text repeats relevant phrases like "new family SUV" right in the opening paragraph. <strong>Keyword density</strong> is a key factor for ranking.',
+                vs: 'Instead of keyword stuffing, the GEO version uses <strong>factual statements with citations</strong> that AI models can directly quote as answers.'
+            },
+            'seo-img': {
+                type: 'seo',
+                title: 'Search-Optimized Alt Text',
+                body: 'The SEO image has a <strong>descriptive alt text</strong> packed with keywords ("Škoda Kodiaq 2025 SUV white side view"). Google Image Search uses alt text for indexing.',
+                vs: 'Instead of keyword-rich alt text, the GEO version adds a <strong>caption with source attribution</strong> — AI models prefer verifiable information with stated origin.'
+            },
+            'seo-h2': {
+                type: 'seo',
+                title: 'H2 with Exact Search Phrase',
+                body: 'The heading "Škoda Kodiaq 2025 Price — How Much Does It Cost?" directly matches a <strong>popular search query</strong>. Google often displays content under such H2s as a featured snippet.',
+                vs: 'The GEO version phrases H2 as a question with context ("what affects the price?") because AI answers <strong>more complex intents</strong>, not just keywords.'
+            },
+            'seo-longtail': {
+                type: 'seo',
+                title: 'Long-Tail Keywords',
+                body: 'The phrase "diesel engines with DSG automatic transmission" targets <strong>long-tail searches</strong> — specific queries with less competition but higher conversion rates.',
+                vs: 'GEO doesn\'t target long-tail keywords. Instead, it provides <strong>contextual information and independent test results</strong> that AI models use to answer queries.'
+            },
+            'seo-internal-link': {
+                type: 'seo',
+                title: 'Internal Linking Opportunity',
+                body: 'The mention of the L&K trim would be an <strong>internal link</strong> to a detailed specs page in an SEO article. Internal linking strengthens the authority of the entire website.',
+                vs: 'GEO doesn\'t use internal links for PageRank. Instead, it includes <strong>expert quotes and third-party reviews</strong> — boosting credibility for AI.'
+            },
+            'seo-vs-heading': {
+                type: 'seo',
+                title: 'Comparison Heading with Competitor Names',
+                body: 'The heading "Kodiaq vs Tucson vs Tiguan" <strong>targets comparison searches</strong> — one of the most valuable query types in terms of conversion.',
+                vs: 'The GEO version frames comparisons as <strong>analytical commentary with nuances</strong> — AI models don\'t need "vs" keywords, they need clear conclusions.'
+            },
+            'seo-faq': {
+                type: 'seo',
+                title: 'FAQ Section with FAQ Schema',
+                body: 'The FAQ section is crucial for SEO — with <strong>FAQ Schema markup</strong>, questions appear directly in search results as expandable answers (rich snippets).',
+                vs: 'GEO doesn\'t need a dedicated FAQ section. AI models extract answers <strong>from the entire article context</strong>, not just formatted FAQ blocks.'
+            },
+            'seo-schema': {
+                type: 'seo',
+                title: 'JSON-LD Schema Markup',
+                body: 'Structured data in JSON-LD format helps Google <strong>understand page content</strong> — product type, price, ratings. Result: rich snippets in search.',
+                vs: 'GEO prefers <strong>inline microdata</strong> and explicit factual statements in the text — AI models read natural text, not just structured data in the header.'
+            },
+            'seo-url': {
+                type: 'seo',
+                title: 'SEO-Optimized URL & Meta Tags',
+                body: 'The URL contains keywords ("/skoda-kodiaq-2025-price-review/"), the title tag has an <strong>exact keyword + number</strong> for higher CTR, the meta description is "salesy" — the goal is a click from search.',
+                vs: 'GEO doesn\'t leverage URLs and meta tags — AI models <strong>don\'t read these elements</strong>. What matters is the content itself and its trustworthiness.'
+            },
+            'geo-h1': {
+                type: 'geo',
+                title: 'Intent-Focused Title',
+                body: 'The GEO H1 is phrased as a <strong>"buyer\'s guide"</strong> — natural, conversational tone. AI models understand intent and don\'t compare keywords.',
+                vs: 'The SEO version packs the H1 with as many keywords as possible ("price, specs, review, comparison") because search engines <strong>match queries to words in the title</strong>.'
+            },
+            'geo-author': {
+                type: 'geo',
+                title: 'Authorship & Source Citation',
+                body: 'GEO states the <strong>author with credentials</strong> and data sources directly in the meta info. AI models assign higher weight to content with verifiable authorship (E-E-A-T principle).',
+                vs: 'SEO meta typically contains date and read time — authorship matters less for ranking; <strong>domain authority and backlinks</strong> are what count.'
+            },
+            'geo-opening': {
+                type: 'geo',
+                title: 'Encyclopedic Opening Paragraph',
+                body: 'The first sentence works as a <strong>"definition"</strong> — stating WHAT it is, WHO makes it, SINCE WHEN, and on WHAT platform. AI models often cite the first paragraph as a summary.',
+                vs: 'The SEO intro targets <strong>engagement and keywords</strong> ("Looking for a new SUV?") — a reader question that makes no sense in an AI answer.'
+            },
+            'geo-img': {
+                type: 'geo',
+                title: 'Image with Caption & Source',
+                body: 'The GEO image has an <strong>informative caption with source attribution</strong> ("Source: Škoda Auto Press"). AI models use captions for context — verifiability increases trust.',
+                vs: 'SEO uses <strong>keyword-optimized alt text</strong> for Google Image Search. Captions are less important for SEO than the alt tag.'
+            },
+            'geo-h2': {
+                type: 'geo',
+                title: 'Question-Based Heading with Context',
+                body: 'The GEO H2 is phrased as a <strong>question a human would ask</strong> ("How much does it cost and what affects the price?"). AI models map content to user questions.',
+                vs: 'The SEO H2 is an exact <strong>search phrase</strong> ("Škoda Kodiaq 2025 Price") — Google matches queries to headings.'
+            },
+            'geo-cite': {
+                type: 'geo',
+                title: 'Specific Source Citation',
+                body: '"According to the official Škoda Auto price list effective January 2025..." — an <strong>explicit citation</strong> with source and validity date. AI models prefer verifiable data.',
+                vs: 'The SEO article states the same data but <strong>without citing a source</strong>. For Google ranking, individual claim credibility matters less than overall domain authority.'
+            },
+            'geo-expert': {
+                type: 'geo',
+                title: 'Expert Quote with Attribution',
+                body: 'A quote from a specific expert (<strong>name, title, publication</strong>) significantly boosts credibility for AI models. Perplexity and ChatGPT cite content with expert opinions more often.',
+                vs: 'SEO articles don\'t use expert quotes — Google evaluates <strong>backlinks and domain authority</strong>, not the presence of quotes in the text.'
+            },
+            'geo-context': {
+                type: 'geo',
+                title: 'Heading with Reference Frame',
+                body: 'The addition "What do independent tests say?" gives both the reader and AI model a <strong>reference frame</strong> — this isn\'t just manufacturer data, but independent verification.',
+                vs: 'The SEO heading is plain and keyword-focused. <strong>Context and credibility</strong> are not part of SEO signals.'
+            },
+            'geo-data': {
+                type: 'geo',
+                title: 'Independent Data with Deviation',
+                body: 'Stating <strong>real-world vs. claimed fuel consumption (ADAC test)</strong> gives the AI model nuanced information. AI prefers sources that present both sides, not just marketing data.',
+                vs: 'The SEO article only states manufacturer values — enough for a keyword match on "Kodiaq fuel consumption" but <strong>doesn\'t provide added value</strong>.'
+            },
+            'geo-authority': {
+                type: 'geo',
+                title: 'Authoritative Source Citation (Euro NCAP)',
+                body: 'Exact percentages from <strong>independent testing (Euro NCAP 92%, 89%, 82%)</strong> are exactly the type of data AI models love to cite — specific, verifiable, from a third party.',
+                vs: 'An SEO article would mention safety generically ("5 stars in crash tests") — <strong>detailed percentages don\'t help ranking</strong>, but they help AI.'
+            },
+            'geo-comparison': {
+                type: 'geo',
+                title: 'Contextual Comparison Instead of "vs"',
+                body: 'The GEO comparison is structured not around a "vs" keyword but around the <strong>buyer\'s decision process</strong> ("in the €35,000–€55,000 price range").',
+                vs: 'SEO comparisons use the <strong>"A vs B vs C" format</strong> in headings to match comparison search queries.'
+            },
+            'geo-nuance': {
+                type: 'geo',
+                title: 'Nuanced Conclusion with Trade-offs',
+                body: 'GEO content <strong>doesn\'t present one product as the clear winner</strong>. It states strengths and weaknesses of all options — AI models prefer balanced and objective answers.',
+                vs: 'SEO articles typically <strong>favor the main product</strong> (for affiliate conversion). Nuance in SEO articles can reduce engagement.'
+            },
+            'geo-summary': {
+                type: 'geo',
+                title: 'Structured Summary with Use Cases',
+                body: 'The closing summary <strong>"who is it ideal for"</strong> with specific scenarios. AI models often cite the closing summary as a direct answer.',
+                vs: 'SEO articles end with a FAQ section and call-to-action — the <strong>goal is conversion</strong>, not summarization. Google doesn\'t need a summary for ranking.'
+            },
+            'geo-structured': {
+                type: 'geo',
+                title: 'Inline Microdata for AI Parsing',
+                body: 'GEO uses <strong>microdata directly in HTML</strong> with explicit facts ("€34,990", "910 l", "5/5 stars"). AI crawlers like Perplexity read these attributes.',
+                vs: 'SEO uses <strong>JSON-LD in the header</strong> — Google reads that, but AI models typically parse visible page content, not header scripts.'
+            }
+        };
+
+        const tooltipEl = document.getElementById('tooltip');
+        const overlayEl = document.getElementById('overlay');
+        let activeHotspot = null;
+        let hideTimeout = null;
+        let locked = false;
+
+        function positionTooltip(el) {
+            const rect = el.getBoundingClientRect();
+            const ttWidth = 360;
+            // Render offscreen first to measure real height
+            tooltipEl.style.left = '-9999px';
+            tooltipEl.style.top = '-9999px';
+            tooltipEl.classList.add('visible');
+            const ttHeight = tooltipEl.offsetHeight || 250;
+
+            const mid = window.innerWidth / 2;
+            const isLeftPanel = el.closest('.panel-seo');
+            let left, top;
+
+            if (isLeftPanel) {
+                // Tooltip goes to the right — into the divider gap or beyond
+                // But must not overlap the hotspot: place after the hotspot's right edge
+                left = Math.min(rect.right + 16, mid - ttWidth - 8);
+                // If not enough space to the right within left half, place above/below but still to the right
+                if (left < 10) left = 10;
+            } else {
+                // Tooltip goes to the left — into the divider gap or beyond
+                left = Math.max(rect.left - ttWidth - 16, mid + 8);
+                // If not enough space, push right
+                if (left + ttWidth > window.innerWidth - 10) left = window.innerWidth - ttWidth - 10;
+            }
+
+            // Vertical: align to hotspot center but ensure fully visible
+            top = rect.top + rect.height / 2 - ttHeight / 2;
+            if (top + ttHeight > window.innerHeight - 16) top = window.innerHeight - ttHeight - 16;
+            if (top < 72) top = 72;
+
+            // Final safety: ensure tooltip doesn't overlap the hotspot element
+            const tooltipRect = { left, top, right: left + ttWidth, bottom: top + ttHeight };
+            const overlap = !(tooltipRect.right < rect.left || tooltipRect.left > rect.right ||
+                              tooltipRect.bottom < rect.top || tooltipRect.top > rect.bottom);
+            if (overlap) {
+                // Push tooltip below the hotspot
+                top = rect.bottom + 12;
+                if (top + ttHeight > window.innerHeight - 16) {
+                    // Or above
+                    top = rect.top - ttHeight - 12;
+                }
+            }
+
+            tooltipEl.classList.remove('visible');
+            tooltipEl.style.left = left + 'px';
+            tooltipEl.style.top = top + 'px';
+        }
+
+        function renderTooltip(key) {
+            const data = tooltips[key];
+            if (!data) return;
+
+            const typeLabel = data.type === 'seo' ? 'SEO Principle' : 'GEO Principle';
+            const vsLabel = data.type === 'seo' ? 'In the GEO version' : 'In the SEO version';
+            const tipClass = data.type === 'seo' ? 'seo-tip' : 'geo-tip';
+
+            tooltipEl.className = 'tooltip ' + tipClass + (locked ? ' spotlight-tip' : '');
+            tooltipEl.innerHTML = `
+                <div class="tooltip-label"><span class="dot"></span>${typeLabel}</div>
+                <div class="tooltip-title">${data.title}</div>
+                <div class="tooltip-body">${data.body}</div>
+                <div class="tooltip-vs">
+                    <div class="vs-label">${vsLabel}:</div>
+                    <p>${data.vs}</p>
+                </div>
+            `;
+        }
+
+        function showTooltip(el, key) {
+            if (locked) return;
+            const data = tooltips[key];
+            if (!data) return;
+
+            clearTimeout(hideTimeout);
+            activeHotspot = key;
+
+            renderTooltip(key);
+            positionTooltip(el);
+            requestAnimationFrame(() => tooltipEl.classList.add('visible'));
+        }
+
+        function hideTooltip() {
+            if (locked) return;
+            hideTimeout = setTimeout(() => {
+                tooltipEl.classList.remove('visible');
+                activeHotspot = null;
+            }, 150);
+        }
+
+        function clearSpotlight() {
+            document.querySelectorAll('.spotlight').forEach(s => s.classList.remove('spotlight'));
+            tooltipEl.classList.remove('spotlight-tip');
+            overlayEl.classList.remove('active');
+            tooltipEl.classList.remove('visible');
+            locked = false;
+            activeHotspot = null;
+        }
+
+        function lockSpotlight(el, key) {
+            // If already locked on same key, unlock
+            if (locked && activeHotspot === key) {
+                clearSpotlight();
+                return;
+            }
+
+            // Clear previous
+            clearSpotlight();
+
+            locked = true;
+            activeHotspot = key;
+
+            // Highlight all elements with same tooltip key
+            document.querySelectorAll(`[data-tooltip="${key}"]`).forEach(s => {
+                s.classList.add('spotlight');
+            });
+
+            overlayEl.classList.add('active');
+
+            renderTooltip(key);
+            positionTooltip(el);
+            requestAnimationFrame(() => {
+                tooltipEl.classList.add('visible');
+                tooltipEl.classList.add('spotlight-tip');
+            });
+        }
+
+        // Attach events
+        document.querySelectorAll('.hotspot, .hotspot-num').forEach(el => {
+            const key = el.dataset.tooltip;
+            if (!key) return;
+
+            // Hover
+            el.addEventListener('mouseenter', () => showTooltip(el, key));
+            el.addEventListener('mouseleave', hideTooltip);
+
+            // Click to lock
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                lockSpotlight(el, key);
+            });
+        });
+
+        // Click overlay or anywhere else to dismiss
+        overlayEl.addEventListener('click', clearSpotlight);
+
+        // Escape key to dismiss
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && locked) clearSpotlight();
+        });
+
+        // Keep tooltip visible on hover (non-locked mode)
+        tooltipEl.addEventListener('mouseenter', () => {
+            if (!locked) clearTimeout(hideTimeout);
+        });
+        tooltipEl.addEventListener('mouseleave', () => {
+            if (!locked) hideTooltip();
+        });
+    </script>
+
+</body>
+</html>
