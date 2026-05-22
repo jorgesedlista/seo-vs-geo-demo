@@ -68,21 +68,64 @@ In the `<script>` section, find `const tooltips = { ... }`. Each entry:
 
 ## How to deploy
 
-### First-time setup (on a new machine)
-```bash
-npm install -g netlify-cli
-netlify login          # Opens browser for auth
-cd /path/to/seo-vs-geo-demo
-netlify link --name seo-vs-geo-demo
-```
+### Workflow (two contributors)
+We share this repo on GitHub. Each contributor has their **own Netlify site** (free tier) for previewing changes. The production URL is managed by Jirka.
 
-### Deploy changes
+- **Production:** https://seo-vs-geo-demo.netlify.app (Jirka deploys)
+- **Your preview:** your own Netlify URL (you create & deploy)
+
+### First-time setup (collaborator)
 ```bash
-cd /path/to/seo-vs-geo-demo
+# 1. Clone the repo
+git clone https://github.com/jorgesedlista/seo-vs-geo-demo.git
+cd seo-vs-geo-demo
+
+# 2. Install Netlify CLI
+npm install -g netlify-cli
+
+# 3. Login to YOUR OWN Netlify account (free)
+netlify login
+
+# 4. Create your own site for preview
+netlify init
+#   → "Create & configure a new site"
+#   → Pick your team
+#   → Choose a site name (e.g. "seo-geo-preview-katka")
+#   → Build command: leave empty (just press Enter)
+#   → Publish directory: .
+
+# 5. Deploy to your preview URL
 netlify deploy --dir=. --prod
 ```
 
-The site deploys to the same URL every time: https://seo-vs-geo-demo.netlify.app
+Your preview site will be at something like `seo-geo-preview-katka.netlify.app`.
+
+### Daily workflow
+```bash
+# 1. Pull latest changes
+git pull
+
+# 2. Edit with Claude
+claude
+
+# 3. Preview your changes
+netlify deploy --dir=. --prod
+# → deploys to YOUR preview URL
+
+# 4. Push changes to shared repo
+git add -A
+git commit -m "description of changes"
+git push
+```
+
+Jirka will pull your changes and deploy to the production URL when ready.
+
+### Production deploy (Jirka only)
+```bash
+git pull
+netlify deploy --dir=. --prod
+# → deploys to https://seo-vs-geo-demo.netlify.app
+```
 
 ## Language
 Content is currently in **English**. Tooltip labels use "SEO Principle" / "GEO Principle" and "In the GEO/SEO version".
