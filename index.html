@@ -583,6 +583,124 @@
             z-index: 210;
         }
 
+        /* ── VIEW TABS ── */
+        .view-tabs {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            background: var(--bg-alt);
+            border-radius: 1000px;
+            padding: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .view-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 5px 14px;
+            border-radius: 1000px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-ter);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .view-tab.view-tab-active {
+            background: var(--bg);
+            color: var(--text);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+        }
+
+        .view-tab:hover:not(.view-tab-active) {
+            color: var(--text-sec);
+            background: rgba(255,255,255,0.5);
+        }
+
+        .view-tab .pill { padding: 4px 12px; }
+
+        /* ── PROCESS MAP VIEW ── */
+        .process-view {
+            display: none;
+            height: 100vh;
+            padding-top: 64px;
+            overflow-y: auto;
+            background: var(--bg);
+        }
+
+        .process-inner {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 32px 24px 80px;
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 28px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .process-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .process-header p {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--text-sec);
+        }
+
+        .process-svg-wrap { width: 100%; overflow-x: auto; }
+        .process-svg-wrap svg { width: 100%; height: auto; display: block; }
+
+        .pnode { cursor: help; }
+        .pnode:hover rect,
+        .pnode:hover circle,
+        .pnode:hover polygon { opacity: 0.88; }
+
+        /* ── PROCESS TOOLTIP ── */
+        .ptooltip {
+            position: fixed;
+            z-index: 300;
+            max-width: 300px;
+            padding: 14px 18px;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        .ptooltip.visible { opacity: 1; transform: translateY(0); }
+
+        .ptooltip-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        .ptooltip-body {
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--text-sec);
+            line-height: 1.6;
+        }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
             .top-bar-center { display: none; }
@@ -616,9 +734,21 @@
         <div class="top-bar-left">
         </div>
         <div class="top-bar-center">
-            <span class="pill pill-seo">SEO</span>
-            <span class="vs">vs</span>
-            <span class="pill pill-geo">GEO</span>
+            <div class="view-tabs">
+                <button class="view-tab view-tab-active" id="tab-seogeo">
+                    <span class="pill pill-seo">SEO</span>
+                    <span class="vs">vs</span>
+                    <span class="pill pill-geo">GEO</span>
+                </button>
+                <button class="view-tab" id="tab-process">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="opacity:0.6"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M10 6.5h4M17.5 10v4M14 17.5h-4M6.5 14v-4"/></svg>
+                    Process Map
+                </button>
+                <button class="view-tab" id="tab-robots">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="opacity:0.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    robots.txt
+                </button>
+            </div>
         </div>
         <div class="top-bar-right">
             <div class="legend-item">
@@ -659,82 +789,7 @@
                 <p>Looking for a <span class="hotspot" data-tooltip="seo-keywords">new family SUV</span><span class="hotspot-num" data-tooltip="seo-keywords">2</span>? The Škoda Kodiaq is one of the best-selling midsize SUVs in Europe. In this article, we cover pricing, engines, specs, and compare it to the competition.</p>
 
                 <figure class="hero-banner">
-                    <svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="sky-seo" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#dcedc8"/>
-                                <stop offset="100%" style="stop-color:#c5e1a5"/>
-                            </linearGradient>
-                            <linearGradient id="road-seo" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#78909c"/>
-                                <stop offset="100%" style="stop-color:#546e7a"/>
-                            </linearGradient>
-                            <linearGradient id="body-seo" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#fafafa"/>
-                                <stop offset="60%" style="stop-color:#e0e0e0"/>
-                            </linearGradient>
-                        </defs>
-                        <!-- Background -->
-                        <rect width="800" height="360" fill="url(#sky-seo)"/>
-                        <!-- Mountains -->
-                        <polygon points="0,220 120,120 240,200 360,100 480,180 600,90 720,170 800,130 800,260 0,260" fill="#a5d6a7" opacity="0.5"/>
-                        <polygon points="0,240 160,160 300,220 450,140 600,200 750,150 800,180 800,260 0,260" fill="#81c784" opacity="0.4"/>
-                        <!-- Road -->
-                        <rect x="0" y="260" width="800" height="100" fill="url(#road-seo)"/>
-                        <rect x="0" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="90" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="180" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="270" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="360" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="450" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="540" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="630" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="720" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <!-- Car body -->
-                        <g transform="translate(200, 170)">
-                            <!-- Shadow -->
-                            <ellipse cx="200" cy="105" rx="180" ry="12" fill="rgba(0,0,0,0.12)"/>
-                            <!-- Lower body -->
-                            <path d="M60,55 L55,80 Q55,90 65,90 L335,90 Q345,90 345,80 L340,55 Z" fill="url(#body-seo)" stroke="#bdbdbd" stroke-width="1"/>
-                            <!-- Upper body / cabin -->
-                            <path d="M120,55 L145,15 Q150,8 160,8 L280,8 Q295,8 300,18 L340,55 Z" fill="url(#body-seo)" stroke="#bdbdbd" stroke-width="1"/>
-                            <!-- Windows -->
-                            <path d="M150,52 L170,18 Q173,13 178,13 L215,13 L215,52 Z" fill="#b2dfdb" stroke="#80cbc4" stroke-width="0.5" opacity="0.8"/>
-                            <path d="M220,13 L220,52 L290,52 L310,18 Q308,13 302,13 Z" fill="#b2dfdb" stroke="#80cbc4" stroke-width="0.5" opacity="0.8"/>
-                            <!-- B-pillar -->
-                            <rect x="215" y="12" width="5" height="41" rx="1" fill="#9e9e9e"/>
-                            <!-- Door line -->
-                            <line x1="215" y1="55" x2="215" y2="88" stroke="#bdbdbd" stroke-width="1"/>
-                            <!-- Headlight -->
-                            <rect x="335" y="58" width="12" height="8" rx="3" fill="#fff9c4" stroke="#f9a825" stroke-width="0.5"/>
-                            <!-- Taillight -->
-                            <rect x="55" y="58" width="8" height="8" rx="2" fill="#ef5350" opacity="0.8"/>
-                            <!-- Grille -->
-                            <rect x="335" y="70" width="10" height="16" rx="2" fill="#424242"/>
-                            <line x1="337" y1="74" x2="343" y2="74" stroke="#616161" stroke-width="0.5"/>
-                            <line x1="337" y1="78" x2="343" y2="78" stroke="#616161" stroke-width="0.5"/>
-                            <line x1="337" y1="82" x2="343" y2="82" stroke="#616161" stroke-width="0.5"/>
-                            <!-- Door handle -->
-                            <rect x="170" y="62" width="16" height="3" rx="1.5" fill="#9e9e9e"/>
-                            <rect x="260" y="62" width="16" height="3" rx="1.5" fill="#9e9e9e"/>
-                            <!-- Roof rails -->
-                            <line x1="145" y1="8" x2="295" y2="8" stroke="#9e9e9e" stroke-width="2" stroke-linecap="round"/>
-                            <!-- Front wheel -->
-                            <circle cx="300" cy="90" r="26" fill="#37474f"/>
-                            <circle cx="300" cy="90" r="22" fill="#455a64"/>
-                            <circle cx="300" cy="90" r="10" fill="#78909c"/>
-                            <circle cx="300" cy="90" r="6" fill="#546e7a"/>
-                            <!-- Rear wheel -->
-                            <circle cx="110" cy="90" r="26" fill="#37474f"/>
-                            <circle cx="110" cy="90" r="22" fill="#455a64"/>
-                            <circle cx="110" cy="90" r="10" fill="#78909c"/>
-                            <circle cx="110" cy="90" r="6" fill="#546e7a"/>
-                            <!-- Škoda badge -->
-                            <circle cx="340" cy="72" r="0" fill="#31694B"/>
-                        </g>
-                        <!-- Brand text overlay -->
-                        <text x="400" y="340" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="rgba(0,0,0,0.2)" letter-spacing="0.1em">ŠKODA KODIAQ 2025</text>
-                    </svg>
+                    <img src="kodiaq.jpg" alt="Škoda Kodiaq 2025 SUV driving on mountain road" style="width:100%;display:block;"/>
                     <div style="padding:8px 16px; font-size:11px; color:var(--text-ter); font-weight:300; background:var(--bg-alt); border-top:1px solid var(--border);">
                         <span class="hotspot" data-tooltip="seo-img">alt="Škoda Kodiaq 2025 SUV white side view on road in nature — new family car"</span><span class="hotspot-num" data-tooltip="seo-img">3</span>
                     </div>
@@ -852,55 +907,7 @@
                 <p><span class="hotspot" data-tooltip="geo-opening">The Škoda Kodiaq is a midsize SUV manufactured by Czech automaker Škoda Auto since 2016. The second generation (NS7) was unveiled in October 2023 on the MQB-evo platform and went on sale in Q1 2024.</span><span class="hotspot-num" data-tooltip="geo-opening">3</span> It is the brand's flagship model in the SUV segment.</p>
 
                 <figure class="hero-banner">
-                    <svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="sky-geo" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#dcedc8"/>
-                                <stop offset="100%" style="stop-color:#c5e1a5"/>
-                            </linearGradient>
-                            <linearGradient id="body-geo" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#fafafa"/>
-                                <stop offset="60%" style="stop-color:#e0e0e0"/>
-                            </linearGradient>
-                        </defs>
-                        <rect width="800" height="360" fill="url(#sky-geo)"/>
-                        <polygon points="0,220 120,120 240,200 360,100 480,180 600,90 720,170 800,130 800,260 0,260" fill="#a5d6a7" opacity="0.5"/>
-                        <polygon points="0,240 160,160 300,220 450,140 600,200 750,150 800,180 800,260 0,260" fill="#81c784" opacity="0.4"/>
-                        <rect x="0" y="260" width="800" height="100" fill="#78909c"/>
-                        <rect x="0" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="90" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="180" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="270" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="360" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="450" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="540" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="630" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <rect x="720" y="306" width="60" height="4" rx="2" fill="#fff" opacity="0.6"/>
-                        <g transform="translate(200, 170)">
-                            <ellipse cx="200" cy="105" rx="180" ry="12" fill="rgba(0,0,0,0.12)"/>
-                            <path d="M60,55 L55,80 Q55,90 65,90 L335,90 Q345,90 345,80 L340,55 Z" fill="url(#body-geo)" stroke="#bdbdbd" stroke-width="1"/>
-                            <path d="M120,55 L145,15 Q150,8 160,8 L280,8 Q295,8 300,18 L340,55 Z" fill="url(#body-geo)" stroke="#bdbdbd" stroke-width="1"/>
-                            <path d="M150,52 L170,18 Q173,13 178,13 L215,13 L215,52 Z" fill="#b2dfdb" stroke="#80cbc4" stroke-width="0.5" opacity="0.8"/>
-                            <path d="M220,13 L220,52 L290,52 L310,18 Q308,13 302,13 Z" fill="#b2dfdb" stroke="#80cbc4" stroke-width="0.5" opacity="0.8"/>
-                            <rect x="215" y="12" width="5" height="41" rx="1" fill="#9e9e9e"/>
-                            <line x1="215" y1="55" x2="215" y2="88" stroke="#bdbdbd" stroke-width="1"/>
-                            <rect x="335" y="58" width="12" height="8" rx="3" fill="#fff9c4" stroke="#f9a825" stroke-width="0.5"/>
-                            <rect x="55" y="58" width="8" height="8" rx="2" fill="#ef5350" opacity="0.8"/>
-                            <rect x="335" y="70" width="10" height="16" rx="2" fill="#424242"/>
-                            <rect x="170" y="62" width="16" height="3" rx="1.5" fill="#9e9e9e"/>
-                            <rect x="260" y="62" width="16" height="3" rx="1.5" fill="#9e9e9e"/>
-                            <line x1="145" y1="8" x2="295" y2="8" stroke="#9e9e9e" stroke-width="2" stroke-linecap="round"/>
-                            <circle cx="300" cy="90" r="26" fill="#37474f"/>
-                            <circle cx="300" cy="90" r="22" fill="#455a64"/>
-                            <circle cx="300" cy="90" r="10" fill="#78909c"/>
-                            <circle cx="300" cy="90" r="6" fill="#546e7a"/>
-                            <circle cx="110" cy="90" r="26" fill="#37474f"/>
-                            <circle cx="110" cy="90" r="22" fill="#455a64"/>
-                            <circle cx="110" cy="90" r="10" fill="#78909c"/>
-                            <circle cx="110" cy="90" r="6" fill="#546e7a"/>
-                        </g>
-                        <text x="400" y="340" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="rgba(0,0,0,0.2)" letter-spacing="0.1em">ŠKODA KODIAQ 2025</text>
-                    </svg>
+                    <img src="kodiaq.jpg" alt="Škoda Kodiaq 2025 SUV driving on mountain road" style="width:100%;display:block;"/>
                     <figcaption>
                         <span class="hotspot" data-tooltip="geo-img">Second generation Škoda Kodiaq (NS7), model year 2025. <strong>Source:</strong> Škoda Auto Press, media archive, published October 2023.</span><span class="hotspot-num" data-tooltip="geo-img">4</span>
                     </figcaption>
@@ -988,11 +995,254 @@
 
     </div>
 
-    <!-- OVERLAY -->
+    <!-- PROCESS MAP VIEW -->
+    <div class="process-view" id="process-view">
+        <div class="process-inner">
+            <div class="process-header">
+                <h2>How GEO Works — The Full Pipeline</h2>
+                <p>From content publication to AI citation. Hover over any node for an explanation.</p>
+            </div>
+            <div class="process-svg-wrap">
+                <svg viewBox="0 0 860 1070" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter',sans-serif">
+                    <defs>
+                        <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                            <polygon points="0 0, 8 3, 0 6" fill="#464748"/>
+                        </marker>
+                        <marker id="arr-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                            <polygon points="0 0, 8 3, 0 6" fill="#31694B"/>
+                        </marker>
+                    </defs>
+
+                    <!-- ══════════════════════════════════════════ -->
+                    <!-- YOUR WEBSITE — centered at x=430, w=560   -->
+                    <!-- ══════════════════════════════════════════ -->
+                    <rect x="150" y="8" width="560" height="337" rx="8" fill="#F4F6F5" stroke="#E4E4E4" stroke-width="1.5"/>
+                    <text x="430" y="27" text-anchor="middle" font-size="10" font-weight="700" fill="#7C7D7E" letter-spacing="1.5">YOUR WEBSITE (Data Source)</text>
+
+                    <g class="pnode" data-ptip="content-pub">
+                        <circle cx="430" cy="68" r="35" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="430" y="63" text-anchor="middle" font-size="11" fill="#464748">Content</text>
+                        <text x="430" y="78" text-anchor="middle" font-size="11" fill="#464748">Publication</text>
+                    </g>
+
+                    <line x1="430" y1="100" x2="430" y2="113" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
+
+                    <g class="pnode" data-ptip="json-ld">
+                        <rect x="320" y="113" width="220" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="430" y="139" text-anchor="middle" font-size="12" fill="#161718">Generate JSON-LD Schema</text>
+                    </g>
+
+                    <line x1="430" y1="157" x2="430" y2="177" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
+
+                    <g class="pnode" data-ptip="indexnow-q">
+                        <polygon points="430,177 519,216 430,255 341,216" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="430" y="220" text-anchor="middle" font-size="12" fill="#161718">Using IndexNow?</text>
+                    </g>
+
+                    <!-- Yes branch → left -->
+                    <path d="M341,216 L240,216 L240,272" stroke="#464748" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+                    <text x="288" y="208" text-anchor="middle" font-size="11" fill="#7C7D7E">Yes</text>
+
+                    <g class="pnode" data-ptip="instant-ping">
+                        <rect x="155" y="272" width="180" height="44" rx="4" fill="#78FAAE"/>
+                        <text x="240" y="291" text-anchor="middle" font-size="11" font-weight="700" fill="#0E3A2F">Instant Search</text>
+                        <text x="240" y="306" text-anchor="middle" font-size="11" font-weight="700" fill="#0E3A2F">Engine Ping</text>
+                    </g>
+
+                    <!-- No branch → right -->
+                    <path d="M519,216 L620,216 L620,272" stroke="#464748" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+                    <text x="572" y="208" text-anchor="middle" font-size="11" fill="#7C7D7E">No</text>
+
+                    <g class="pnode" data-ptip="random-crawl">
+                        <rect x="527" y="272" width="180" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="620" y="291" text-anchor="middle" font-size="11" fill="#161718">Wait for Random</text>
+                        <text x="620" y="306" text-anchor="middle" font-size="11" fill="#161718">Crawl</text>
+                    </g>
+
+                    <!-- ══════════════════════════════════════════════════════ -->
+                    <!-- Two lower boxes — centered under Website box (cx=430) -->
+                    <!-- AI: x=10, w=310, cx=165  |  Bing: x=330, w=440, cx=550 -->
+                    <!-- Total width=770, left margin=(860-770)/2=45 → AI x=45  -->
+                    <!-- AI: x=45 w=310 cx=200  |  Bing: x=365 w=440 cx=585    -->
+                    <!-- ══════════════════════════════════════════════════════ -->
+
+                    <!-- BING BOX -->
+                    <rect x="365" y="355" width="440" height="390" rx="8" fill="#F4F6F5" stroke="#E4E4E4" stroke-width="1.5"/>
+                    <text x="585" y="374" text-anchor="middle" font-size="10" font-weight="700" fill="#7C7D7E" letter-spacing="1.5">BING / SEARCH ENGINE</text>
+                    <text x="585" y="388" text-anchor="middle" font-size="9" fill="#AAAAAA">(Indexing &amp; Knowledge)</text>
+
+                     <!-- ── CROSS: Website → Bing — both branches merge at y=348 into BingBot ── -->
+                    <path d="M240,316 L240,348 L485,348 L485,405" stroke="#464748" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+                    <path d="M670,316 L670,405" stroke="#464748" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+
+                    <!-- AI BOX -->
+                    <rect x="45" y="355" width="310" height="610" rx="8" fill="#F4F6F5" stroke="#E4E4E4" stroke-width="1.5"/>
+                    <text x="200" y="374" text-anchor="middle" font-size="10" font-weight="700" fill="#7C7D7E" letter-spacing="1.2">AI ASSISTANT</text>
+                    <text x="200" y="388" text-anchor="middle" font-size="9" fill="#AAAAAA">(ChatGPT / Perplexity)</text>
+
+                    <!-- ── BING NODES ── -->
+
+                    <g class="pnode" data-ptip="bingbot">
+                        <rect x="471" y="405" width="228" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="585" y="431" text-anchor="middle" font-size="12" fill="#161718">BingBot Crawling &amp; Parsing</text>
+                    </g>
+
+                    <line x1="585" y1="449" x2="585" y2="469" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
+
+                    <g class="pnode" data-ptip="info-gain">
+                        <polygon points="585,469 669,507 585,545 501,507" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="585" y="511" text-anchor="middle" font-size="12" fill="#161718">Information Gain Check</text>
+                    </g>
+
+                    <!-- Low branch — full color now -->
+                    <path d="M501,507 L456,507 L456,567" stroke="#464748" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+                    <text x="476" y="499" text-anchor="middle" font-size="11" fill="#7C7D7E">Low</text>
+
+                    <!-- High branch -->
+                    <path d="M669,507 L714,507 L714,567" stroke="#464748" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+                    <text x="700" y="499" text-anchor="middle" font-size="11" fill="#7C7D7E">High</text>
+
+                    <!-- Standard Indexing — full color, NO outgoing arrow -->
+                    <g class="pnode" data-ptip="standard-index">
+                        <rect x="374" y="567" width="164" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="456" y="593" text-anchor="middle" font-size="11.5" fill="#161718">Standard Indexing</text>
+                    </g>
+
+                    <!-- Entity KG -->
+                    <g class="pnode" data-ptip="entity-kg">
+                        <rect x="614" y="567" width="180" height="44" rx="4" fill="#e91e8c"/>
+                        <text x="704" y="586" text-anchor="middle" font-size="11" font-weight="700" fill="white">Entity Knowledge Graph</text>
+                        <text x="704" y="601" text-anchor="middle" font-size="11" font-weight="700" fill="white">Injection</text>
+                    </g>
+
+                    <!-- Entity KG → Vector DB -->
+                    <path d="M714,611 L714,685 L700,685" stroke="#464748" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+
+                    <g class="pnode" data-ptip="vector-db">
+                        <rect x="473" y="662" width="224" height="52" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <ellipse cx="585" cy="662" rx="112" ry="14" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="585" y="688" text-anchor="middle" font-size="11.5" fill="#161718">Vector Database /</text>
+                        <text x="585" y="703" text-anchor="middle" font-size="11.5" fill="#161718">RAG Index</text>
+                    </g>
+
+                    <!-- ── AI ASSISTANT NODES ── -->
+
+                    <g class="pnode" data-ptip="user-query">
+                        <circle cx="200" cy="425" r="30" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="200" y="420" text-anchor="middle" font-size="11" fill="#464748">User</text>
+                        <text x="200" y="434" text-anchor="middle" font-size="11" fill="#464748">Query</text>
+                    </g>
+
+                    <line x1="200" y1="455" x2="200" y2="470" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
+
+                    <g class="pnode" data-ptip="intent-analysis">
+                        <rect x="105" y="470" width="190" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="200" y="496" text-anchor="middle" font-size="12" fill="#161718">Intent Analysis</text>
+                    </g>
+
+                    <line x1="200" y1="514" x2="200" y2="540" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
+
+                    <g class="pnode" data-ptip="rag">
+                        <rect x="85" y="540" width="230" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="200" y="559" text-anchor="middle" font-size="11" fill="#161718">RAG — Retrieval Augmented</text>
+                        <text x="200" y="574" text-anchor="middle" font-size="11" fill="#161718">Generation</text>
+                    </g>
+
+                    <!-- RAG → Vector DB: route below Standard Indexing to avoid overlap -->
+                    <path d="M315,562 L365,562 L365,688 L473,688" stroke="#464748" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+
+                    <!-- Vector DB → Top Source Selection (cross-section, green dashed) -->
+                    <path d="M473,705 L295,705" stroke="#464748" stroke-width="1.5" fill="none"  marker-end="url(#arr)"/>
+
+                    <g class="pnode" data-ptip="top-source">
+                        <rect x="105" y="690" width="190" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="200" y="711" text-anchor="middle" font-size="12" fill="#161718">Top Source Selection</text>
+                    </g>
+
+                    <line x1="200" y1="733" x2="200" y2="783" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
+
+                    <g class="pnode" data-ptip="answer-synth">
+                        <rect x="85" y="783" width="230" height="44" rx="4" fill="#78FAAE"/>
+                        <text x="200" y="802" text-anchor="middle" font-size="11" font-weight="700" fill="#0E3A2F">Answer Synthesis</text>
+                        <text x="200" y="817" text-anchor="middle" font-size="11" font-weight="700" fill="#0E3A2F">with Citations</text>
+                    </g>
+
+                    <line x1="200" y1="827" x2="200" y2="887" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
+
+                    <g class="pnode" data-ptip="user-response">
+                        <circle cx="200" cy="917" r="30" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="200" y="912" text-anchor="middle" font-size="11" fill="#464748">User</text>
+                        <text x="200" y="926" text-anchor="middle" font-size="11" fill="#464748">Response</text>
+                    </g>
+
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- ROBOTS.TXT VIEW -->
+    <div id="robots-view" style="display:none; position:fixed; top:64px; left:0; right:0; bottom:0; background:var(--bg); overflow-y:auto;">
+        <div style="max-width:780px; margin:0 auto; padding:48px 40px 160px;">
+
+            <div style="margin-bottom:40px;">
+                <div class="panel-badge" style="background:var(--green-dark);color:#fff;margin-bottom:16px;">Technical SEO</div>
+                <h2 style="font-size:28px;font-weight:700;color:var(--text);margin-bottom:12px;">robots.txt</h2>
+                <p style="font-size:14px;color:var(--text-ter);font-weight:300;max-width:560px;line-height:1.7;">
+                    The <code style="background:var(--bg-alt);padding:2px 6px;border-radius:4px;font-size:13px;">robots.txt</code> file tells search engine crawlers which parts of your site they are allowed or not allowed to index. Always place it in the root directory of your domain.
+                </p>
+            </div>
+
+            <div style="background:var(--green-deep);border-radius:16px;overflow:hidden;">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid rgba(255,255,255,0.08);">
+                    <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.05em;">robots.txt</span>
+                    <span style="font-size:11px;color:rgba(255,255,255,0.25);">root directory</span>
+                </div>
+                <pre style="margin:0;padding:28px 32px;font-size:13.5px;line-height:1.9;color:rgba(255,255,255,0.88);font-family:'Courier New',monospace;overflow-x:auto;"><code><span style="color:#78FAAE;">User-agent: *</span>
+
+<span style="color:rgba(255,255,255,0.35)"># Block system paths</span>
+Disallow: /libs/
+Disallow: /apps/
+Disallow: /conf/
+Disallow: /etc.clientlibs/
+
+<span style="color:rgba(255,255,255,0.35)"># Block sort and filter parameters (prevent duplicate content)</span>
+Disallow: *?*sort=
+Disallow: *?*filter=
+
+<span style="color:rgba(255,255,255,0.35)"># Sitemap location</span>
+Sitemap: https://www.yourdomain.com/sitemap.xml</code></pre>
+            </div>
+
+            <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div style="padding:20px 24px;background:var(--bg-alt);border-radius:12px;border:1px solid var(--border);">
+                    <div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--green-dark);margin-bottom:8px;">User-agent: *</div>
+                    <p style="font-size:13px;font-weight:300;color:var(--text-sec);line-height:1.6;margin:0;">The wildcard applies the rules to all crawlers. You can target a specific bot instead, e.g. <code style="background:var(--border);padding:1px 5px;border-radius:3px;font-size:12px;">Googlebot</code>.</p>
+                </div>
+                <div style="padding:20px 24px;background:var(--bg-alt);border-radius:12px;border:1px solid var(--border);">
+                    <div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--green-dark);margin-bottom:8px;">Disallow</div>
+                    <p style="font-size:13px;font-weight:300;color:var(--text-sec);line-height:1.6;margin:0;">Any path listed here is off-limits to crawlers. An empty <code style="background:var(--border);padding:1px 5px;border-radius:3px;font-size:12px;">Disallow:</code> means everything is allowed.</p>
+                </div>
+                <div style="padding:20px 24px;background:var(--bg-alt);border-radius:12px;border:1px solid var(--border);">
+                    <div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--green-dark);margin-bottom:8px;">URL Parameters</div>
+                    <p style="font-size:13px;font-weight:300;color:var(--text-sec);line-height:1.6;margin:0;">Blocking URLs with parameters like <code style="background:var(--border);padding:1px 5px;border-radius:3px;font-size:12px;">?sort=</code> prevents duplicate content created by filtering and sorting.</p>
+                </div>
+                <div style="padding:20px 24px;background:var(--bg-alt);border-radius:12px;border:1px solid var(--border);">
+                    <div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--green-dark);margin-bottom:8px;">Sitemap</div>
+                    <p style="font-size:13px;font-weight:300;color:var(--text-sec);line-height:1.6;margin:0;">Linking your sitemap here helps crawlers discover all important pages on your site faster.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
     <div class="overlay" id="overlay"></div>
 
     <!-- TOOLTIP -->
     <div class="tooltip" id="tooltip"></div>
+
+    <!-- PROCESS TOOLTIP -->
+    <div class="ptooltip" id="ptooltip"></div>
 
     <script>
         const tooltips = {
@@ -1307,6 +1557,141 @@
         tooltipEl.addEventListener('mouseleave', () => {
             if (!locked) hideTooltip();
         });
+
+        // ── PROCESS MAP ──
+
+        const processTips = {
+            'content-pub': {
+                title: 'Content Publication',
+                body: 'Your website publishes new content — article, product page, review, etc. This is the origin point for both SEO and GEO discovery pipelines.'
+            },
+            'json-ld': {
+                title: 'Generate JSON-LD Schema',
+                body: 'Structured data markup (Schema.org) in the &lt;head&gt; — explicitly tells crawlers what your content is: product, article, FAQ, review, author. Essential for entity recognition by AI knowledge graphs.'
+            },
+            'indexnow-q': {
+                title: 'Using IndexNow?',
+                body: 'IndexNow is a protocol supported by Bing, Yandex, and others. When you publish content, you can instantly notify search engines rather than waiting for their crawlers to discover your page.'
+            },
+            'instant-ping': {
+                title: 'Instant Search Engine Ping',
+                body: 'With IndexNow, your content is flagged for immediate crawl. Bing can index new pages within minutes — dramatically accelerating your entry into the RAG pipeline and AI citations.'
+            },
+            'random-crawl': {
+                title: 'Wait for Random Crawl',
+                body: 'Without IndexNow, BingBot discovers your page on its own schedule. For new domains or infrequently crawled pages, this can take days or weeks — delaying your GEO visibility significantly.'
+            },
+            'bingbot': {
+                title: 'BingBot Crawling & Parsing',
+                body: 'BingBot fetches your page, renders JavaScript, and extracts all content — text, headings, tables, images, and structured data. Content clarity and uniqueness directly shapes what gets stored in Bing\'s knowledge systems.'
+            },
+            'info-gain': {
+                title: 'Information Gain Check',
+                body: 'Bing evaluates whether your content adds genuinely new information to its index — novel facts, independent test data, expert analysis, or better detail than existing sources. High-gain content gets fast-tracked to the Entity Knowledge Graph.'
+            },
+            'standard-index': {
+                title: 'Standard Indexing',
+                body: 'Content with low information gain is added to the standard search index. It can still rank in SERPs, but is unlikely to be injected into Bing\'s AI knowledge graph or cited by Copilot, ChatGPT, or Perplexity.'
+            },
+            'entity-kg': {
+                title: 'Entity Knowledge Graph Injection',
+                body: 'High-gain content is injected into Bing\'s Entity Knowledge Graph — a structured database of facts, entities, and relationships. Content stored here is the primary source for AI-generated answers and citations.'
+            },
+            'vector-db': {
+                title: 'Vector Database / RAG Index',
+                body: 'Content is chunked into passages, converted into semantic vector embeddings, and stored in a vector database. AI assistants query this to retrieve contextually relevant content — the core of Retrieval-Augmented Generation.'
+            },
+            'user-query': {
+                title: 'User Query',
+                body: 'A user asks ChatGPT, Perplexity, Copilot, or another AI assistant a question. The intent — informational, comparative, decision-making — shapes which sources and facts get prioritized in retrieval.'
+            },
+            'intent-analysis': {
+                title: 'Intent Analysis',
+                body: 'The AI classifies the user\'s intent and identifies key entities in the query. Is the user comparing products? Seeking specific data? This mapping determines what gets retrieved from the vector database.'
+            },
+            'rag': {
+                title: 'RAG — Retrieval Augmented Generation',
+                body: 'The AI queries the Vector Database for semantically similar content chunks. GEO-optimized content — with clear facts, citations, and entity data — is more likely to be retrieved and included in the answer.'
+            },
+            'top-source': {
+                title: 'Top Source Selection',
+                body: 'From all retrieved chunks, the AI re-ranks and selects the top sources to ground its answer. Authoritative, specific, and well-structured content that directly answers the query ranks higher for inclusion.'
+            },
+            'answer-synth': {
+                title: 'Answer Synthesis with Citations',
+                body: 'The AI assembles the final answer from selected sources and adds citations. This is the GEO payoff — your content, cited in an AI answer seen by potentially millions of users.'
+            },
+            'user-response': {
+                title: 'User Response',
+                body: 'The user receives an AI-generated answer, potentially with your website cited as a source. This is the GEO equivalent of a top SERP position — direct, visible presence in AI-mediated answers.'
+            }
+        };
+
+        const ptooltipEl = document.getElementById('ptooltip');
+        let ptipTimeout = null;
+
+        function showPTip(el, key) {
+            const data = processTips[key];
+            if (!data) return;
+            clearTimeout(ptipTimeout);
+            ptooltipEl.innerHTML = `<div class="ptooltip-title">${data.title}</div><div class="ptooltip-body">${data.body}</div>`;
+            const rect = el.getBoundingClientRect();
+            const ttWidth = 300;
+            let left = rect.right + 14;
+            let top = rect.top + rect.height / 2 - 44;
+            if (left + ttWidth > window.innerWidth - 10) left = rect.left - ttWidth - 14;
+            if (left < 10) left = 10;
+            if (top + 110 > window.innerHeight - 10) top = window.innerHeight - 120;
+            if (top < 10) top = 10;
+            ptooltipEl.style.left = left + 'px';
+            ptooltipEl.style.top = top + 'px';
+            ptooltipEl.classList.add('visible');
+        }
+
+        function hidePTip() {
+            ptipTimeout = setTimeout(() => ptooltipEl.classList.remove('visible'), 100);
+        }
+
+        document.querySelectorAll('.pnode').forEach(el => {
+            const key = el.dataset.ptip;
+            if (!key) return;
+            el.addEventListener('mouseenter', () => showPTip(el, key));
+            el.addEventListener('mouseleave', hidePTip);
+        });
+
+        function switchView(view) {
+            const splitEl = document.querySelector('.split-container');
+            const dividerEl = document.querySelector('.divider');
+            const processEl = document.getElementById('process-view');
+            const robotsEl = document.getElementById('robots-view');
+            const tabSeo = document.getElementById('tab-seogeo');
+            const tabProc = document.getElementById('tab-process');
+            const tabRobots = document.getElementById('tab-robots');
+
+            splitEl.style.display = 'none';
+            dividerEl.style.display = 'none';
+            processEl.style.display = 'none';
+            robotsEl.style.display = 'none';
+            tabSeo.classList.remove('view-tab-active');
+            tabProc.classList.remove('view-tab-active');
+            tabRobots.classList.remove('view-tab-active');
+
+            if (view === 'seogeo') {
+                splitEl.style.display = 'flex';
+                dividerEl.style.display = 'block';
+                tabSeo.classList.add('view-tab-active');
+            } else if (view === 'process') {
+                processEl.style.display = 'block';
+                tabProc.classList.add('view-tab-active');
+            } else if (view === 'robots') {
+                robotsEl.style.display = 'block';
+                tabRobots.classList.add('view-tab-active');
+            }
+        }
+
+        document.getElementById('tab-seogeo').addEventListener('click', () => switchView('seogeo'));
+        document.getElementById('tab-process').addEventListener('click', () => switchView('process'));
+        document.getElementById('tab-robots').addEventListener('click', () => switchView('robots'));
     </script>
 
 </body>
