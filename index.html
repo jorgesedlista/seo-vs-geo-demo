@@ -1177,6 +1177,16 @@
 
                 </svg>
             </div>
+
+            <div style="margin-top:56px;">
+                <div class="panel-badge" style="background:var(--green-dark);color:#fff;margin-bottom:16px;">Frontend Architecture</div>
+                <h3 style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:10px;">Microfrontend crawler visibility</h3>
+                <p style="font-size:14px;color:var(--text-ter);font-weight:300;line-height:1.7;margin-bottom:24px;max-width:560px;">
+                    A page built from microfrontends — Feature Apps 1 &amp; 2 are server-side rendered and visible to the crawler immediately. Feature Apps 3 &amp; 4 are JavaScript client-side rendered and invisible to the crawler.
+                </p>
+                <img src="ArchiDiagram.png" alt="Component diagram showing crawler visibility in a microfrontend architecture — SSR components accessible, JS-rendered components invisible" style="width:100%;border-radius:12px;border:1px solid var(--border);display:block;"/>
+            </div>
+
         </div>
     </div>
 
@@ -1197,20 +1207,20 @@
                     <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.05em;">robots.txt</span>
                     <span style="font-size:11px;color:rgba(255,255,255,0.25);">root directory</span>
                 </div>
-                <pre style="margin:0;padding:28px 32px;font-size:13.5px;line-height:1.9;color:rgba(255,255,255,0.88);font-family:'Courier New',monospace;overflow-x:auto;"><code><span style="color:#78FAAE;">User-agent: *</span>
+                <textarea id="robots-editor" spellcheck="false" style="display:block;width:100%;box-sizing:border-box;margin:0;padding:28px 32px;font-size:13.5px;line-height:1.9;color:rgba(255,255,255,0.88);font-family:'Courier New',monospace;background:transparent;border:none;outline:none;resize:vertical;min-height:420px;overflow-x:auto;">User-agent: *
 
-<span style="color:rgba(255,255,255,0.35)"># Block system paths</span>
+# Block system paths
 Disallow: /libs/
 Disallow: /apps/
 Disallow: /conf/
 Disallow: /etc.clientlibs/
 
-<span style="color:rgba(255,255,255,0.35)"># Block sort and filter parameters (prevent duplicate content)</span>
+# Block sort and filter parameters (prevent duplicate content)
 Disallow: *?*sort=
 Disallow: *?*filter=
 
-<span style="color:rgba(255,255,255,0.35)"># Sitemap location</span>
-Sitemap: https://www.yourdomain.com/sitemap.xml</code></pre>
+# Sitemap location
+Sitemap: https://www.yourdomain.com/sitemap.xml</textarea>
             </div>
 
             <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
