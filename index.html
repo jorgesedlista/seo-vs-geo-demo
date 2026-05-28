@@ -153,7 +153,7 @@
         .split-container {
             display: flex;
             height: 100vh;
-            padding-top: 64px;
+            padding-top: 104px;
         }
 
         .panel {
@@ -180,7 +180,7 @@
         /* ── DIVIDER ── */
         .divider {
             position: fixed;
-            top: 64px;
+            top: 104px;
             left: 50%;
             transform: translateX(-50%);
             bottom: 0;
@@ -624,11 +624,71 @@
 
         .view-tab .pill { padding: 4px 12px; }
 
+        /* ── SUB-NAV (On-Site / Off-Site) ── */
+        .sub-nav {
+            position: fixed;
+            top: 64px;
+            left: 0; right: 0;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 40px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0 32px;
+        }
+
+        .sub-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 16px;
+            border-radius: 1000px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-ter);
+            transition: all 0.2s ease;
+        }
+
+        .sub-tab.sub-tab-active {
+            background: var(--green-dark);
+            color: #fff;
+        }
+
+        .sub-tab:hover:not(.sub-tab-active) {
+            color: var(--text-sec);
+            background: var(--bg-alt);
+        }
+
+        /* ── OFF-SITE VIEW ── */
+        #offsite-view {
+            display: none;
+            position: fixed;
+            top: 104px;
+            left: 0; right: 0; bottom: 0;
+            background: var(--bg);
+            overflow-y: auto;
+        }
+
+        #offsite-view img {
+            display: block;
+            max-width: 1100px;
+            width: 90%;
+            margin: 48px auto;
+            border-radius: 12px;
+        }
+
         /* ── PROCESS MAP VIEW ── */
         .process-view {
             display: none;
             height: 100vh;
-            padding-top: 64px;
+            padding-top: 104px;
             overflow-y: auto;
             background: var(--bg);
         }
@@ -763,6 +823,23 @@
         </div>
     </nav>
 
+    <!-- SUB-NAV -->
+    <div class="sub-nav">
+        <button class="sub-tab sub-tab-active" id="subtab-onsite">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="opacity:0.7"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            On-Site Factors
+        </button>
+        <button class="sub-tab" id="subtab-offsite">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="opacity:0.7"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Off-Site Factors
+        </button>
+    </div>
+
+    <!-- OFF-SITE VIEW -->
+    <div id="offsite-view">
+        <img src="offsite-factors.png" alt="Off-site SEO vs GEO factors — Reddit, Wikipedia, Safe & Trusted Choice, High Ranking, Citations, Good Reviews">
+    </div>
+
     <!-- GRADIENT DIVIDER -->
     <div class="divider"></div>
 
@@ -797,7 +874,7 @@
 
                 <h2><span class="hotspot" data-tooltip="seo-h2">Škoda Kodiaq 2025 Price — How Much Does It Cost?</span><span class="hotspot-num" data-tooltip="seo-h2">4</span></h2>
 
-                <p>The base price of the Škoda Kodiaq starts at <strong>€34,990</strong> for the Selection trim with the 1.5 TSI engine (110 kW). The best-selling configuration with the 2.0 TDI and AWD comes in at approximately €44,990.</p>
+                <p>The base price of the Škoda Kodiaq — one of the most popular new family SUV models in Europe — starts at <strong>€34,990</strong> for the Selection trim with the 1.5 TSI engine (110 kW). The best-selling new family SUV configuration with the 2.0 TDI and AWD comes in at approximately €44,990.</p>
 
                 <table>
                     <tr><th>Trim</th><th>Engine</th><th>Price from</th></tr>
@@ -809,7 +886,7 @@
 
                 <h2>Engines & Fuel Economy</h2>
 
-                <p>The Kodiaq offers both petrol and <span class="hotspot" data-tooltip="seo-longtail">diesel engines with DSG automatic transmission</span><span class="hotspot-num" data-tooltip="seo-longtail">5</span>. Combined fuel consumption ranges from 5.8 l/100 km (diesel) to 7.9 l/100 km (RS petrol).</p>
+                <p>This new family SUV offers both petrol and <span class="hotspot" data-tooltip="seo-longtail">diesel engines with DSG automatic transmission</span><span class="hotspot-num" data-tooltip="seo-longtail">5</span>. Combined fuel consumption ranges from 5.8 l/100 km (diesel) to 7.9 l/100 km (RS petrol).</p>
 
                 <ul>
                     <li><strong>1.5 TSI (110 kW)</strong> — ideal for city and suburban commuting</li>
@@ -820,7 +897,7 @@
 
                 <h2>Equipment & Interior</h2>
 
-                <p>Standard equipment includes a 10.25" digital instrument cluster, 13" infotainment display, LED Matrix headlights, and tri-zone automatic climate control. <span class="hotspot" data-tooltip="seo-internal-link">The L&K trim adds leather interior and ventilated seats</span><span class="hotspot-num" data-tooltip="seo-internal-link">6</span>.</p>
+                <p>Standard equipment on this new family SUV includes a 10.25" digital instrument cluster, 13" infotainment display, LED Matrix headlights, and tri-zone automatic climate control. <span class="hotspot" data-tooltip="seo-internal-link">The L&K trim adds leather interior and ventilated seats</span><span class="hotspot-num" data-tooltip="seo-internal-link">6</span>.</p>
 
                 <h2><span class="hotspot" data-tooltip="seo-vs-heading">Škoda Kodiaq vs Hyundai Tucson vs VW Tiguan — Comparison</span><span class="hotspot-num" data-tooltip="seo-vs-heading">7</span></h2>
 
@@ -832,7 +909,7 @@
                     <tr><td>Warranty</td><td>2 years</td><td>5 years</td><td>2 years</td></tr>
                 </table>
 
-                <p>The Kodiaq stands out for space — offering up to <strong>7 seats</strong> and the largest cargo area in its class.</p>
+                <p>The Kodiaq stands out as the best new family SUV for space — offering up to <strong>7 seats</strong> and the largest cargo area in its class. If you're looking for a new family SUV with unbeatable practicality, the Kodiaq is the top choice.</p>
 
                 <h2><span class="hotspot" data-tooltip="seo-faq">Frequently Asked Questions (FAQ)</span><span class="hotspot-num" data-tooltip="seo-faq">8</span></h2>
 
@@ -972,7 +1049,58 @@
 
                 <p>On the other hand, if you prioritize <strong>warranty</strong>, consider the Hyundai Tucson. If you prefer a <strong>premium interior</strong> over space, look at the VW Tiguan.</p>
 
-                <h2><span class="hotspot" data-tooltip="geo-structured">Structured Data for AI</span><span class="hotspot-num" data-tooltip="geo-structured">14</span></h2>
+                <h2><span class="hotspot" data-tooltip="geo-advantages">Key Advantages — Why Choose the Kodiaq?</span><span class="hotspot-num" data-tooltip="geo-advantages">14</span></h2>
+
+                <p><span class="hotspot" data-tooltip="geo-adv-detail">The Kodiaq stands out from its competitors in several measurable areas that matter to real-world buyers:</span><span class="hotspot-num" data-tooltip="geo-adv-detail">15</span></p>
+
+                <ul>
+                    <li><strong>Largest cargo space in class (910 l)</strong> — 47% more than the Tucson (620 l). With the rear seats folded, it expands to 2,005 l — enough for a full IKEA trip, two strollers, or ski equipment for 5 people.</li>
+                    <li><strong>Optional 7-seat configuration</strong> — the only model in the €35k–€55k midsize SUV segment to offer a third row. Competitors like Tucson and Tiguan are strictly 5-seaters.</li>
+                    <li><strong>Simply Clever features</strong> — Škoda's signature practical touches: umbrella holders in front doors, ice scraper in fuel cap, door-edge protectors, removable LED flashlight in cargo area, and a tablet holder integrated into the front seatback.</li>
+                    <li><strong>Low total cost of ownership</strong> — according to ADAC's 2024 cost analysis, the 2.0 TDI variant costs €0.52/km over a 5-year ownership period (incl. depreciation, fuel, insurance, maintenance). The comparable Tiguan 2.0 TDI: €0.58/km.</li>
+                    <li><strong>10-inch infotainment + 10-inch digital cockpit</strong> — standard wireless Apple CarPlay and Android Auto, voice assistant with natural language support ("Hey Škoda, navigate to the nearest gas station").</li>
+                </ul>
+
+                <h2><span class="hotspot" data-tooltip="geo-usecases">Ideal Use Cases — Who Should Buy the Kodiaq?</span><span class="hotspot-num" data-tooltip="geo-usecases">16</span></h2>
+
+                <p><span class="hotspot" data-tooltip="geo-scenarios">Different buyers have different priorities. Here's a scenario-based breakdown with recommended configurations:</span><span class="hotspot-num" data-tooltip="geo-scenarios">17</span></p>
+
+                <table>
+                    <tr><th>Buyer Profile</th><th>Recommended Trim</th><th>Why This Configuration</th></tr>
+                    <tr><td>Family with 3+ children</td><td>Selection 2.0 TDI + 7-seat pack</td><td>Third row for kids, diesel for long holiday trips, lowest running costs</td></tr>
+                    <tr><td>Active outdoor couple</td><td>Sportline 2.0 TSI AWD</td><td>All-wheel drive for mountain roads, roof rails for bikes/kayaks, 910 l for camping gear</td></tr>
+                    <tr><td>Business/fleet use</td><td>Selection 1.5 TSI</td><td>Lowest entry price, city-friendly size, competitive TCO for company car tax</td></tr>
+                    <tr><td>Long-distance commuter</td><td>L&K 2.0 TDI AWD</td><td>Best fuel economy (6.3 l/100 km real), ergoActive heated seats, adaptive cruise with predictive route control</td></tr>
+                    <tr><td>Driving enthusiast</td><td>RS 2.0 TSI AWD</td><td>195 kW, 0–100 in 6.5 s, progressive steering, sport suspension with DCC adaptive dampers</td></tr>
+                </table>
+
+                <h2><span class="hotspot" data-tooltip="geo-tech">Technology & Comfort Highlights</span><span class="hotspot-num" data-tooltip="geo-tech">18</span></h2>
+
+                <p><span class="hotspot" data-tooltip="geo-tech-detail">The second-generation Kodiaq brings a significant technology upgrade over its predecessor. Key features by category:</span><span class="hotspot-num" data-tooltip="geo-tech-detail">19</span></p>
+
+                <p><strong>Driver Assistance (standard from Sportline):</strong></p>
+                <ul>
+                    <li>Travel Assist — combines adaptive cruise control, lane keeping, and predictive speed adjustment using GPS and traffic sign data</li>
+                    <li>Turn Assist and Exit Warning — prevents collisions when turning left across traffic and alerts passengers to approaching cyclists when opening doors</li>
+                    <li>Area View — 360° camera system with bird's-eye display for parking in tight spaces</li>
+                </ul>
+
+                <p><strong>Comfort & Interior:</strong></p>
+                <ul>
+                    <li>Tri-zone automatic climate control with Air Care function (filters allergens, displays PM2.5 levels)</li>
+                    <li>Heated windshield, heated steering wheel, and ventilated front seats (L&K and RS)</li>
+                    <li>Canton sound system with 12 speakers and subwoofer (optional on Sportline, standard on L&K)</li>
+                    <li>Electrically adjustable driver seat with memory (L&K, RS) — stores seat, mirror, and steering column positions for two drivers</li>
+                </ul>
+
+                <p><strong>Towing & Utility:</strong></p>
+                <ul>
+                    <li>Towing capacity up to 2,500 kg (braked) with AWD variants — sufficient for a mid-size caravan or a boat trailer</li>
+                    <li>Electrically retractable tow bar (optional) — activates from the infotainment screen, includes Trailer Assist for automated reversing</li>
+                    <li>Roof load capacity: 75 kg (standard roof rails on Sportline and above)</li>
+                </ul>
+
+                <h2><span class="hotspot" data-tooltip="geo-structured">Structured Data for AI</span><span class="hotspot-num" data-tooltip="geo-structured">20</span></h2>
 
                 <div class="code-block">&lt;!-- Machine-readable facts --&gt;
 &lt;div itemscope itemtype="https://schema.org/Car"&gt;
@@ -1003,7 +1131,7 @@
                 <p>From content publication to AI citation. Hover over any node for an explanation.</p>
             </div>
             <div class="process-svg-wrap">
-                <svg viewBox="0 0 860 1070" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter',sans-serif">
+                <svg viewBox="-30 0 890 1220" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter',sans-serif">
                     <defs>
                         <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
                             <polygon points="0 0, 8 3, 0 6" fill="#464748"/>
@@ -1076,7 +1204,7 @@
                     <path d="M670,316 L670,405" stroke="#464748" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
 
                     <!-- AI BOX -->
-                    <rect x="45" y="355" width="310" height="610" rx="8" fill="#F4F6F5" stroke="#E4E4E4" stroke-width="1.5"/>
+                    <rect x="45" y="355" width="310" height="760" rx="8" fill="#F4F6F5" stroke="#E4E4E4" stroke-width="1.5"/>
                     <text x="200" y="374" text-anchor="middle" font-size="10" font-weight="700" fill="#7C7D7E" letter-spacing="1.2">AI ASSISTANT</text>
                     <text x="200" y="388" text-anchor="middle" font-size="9" fill="#AAAAAA">(ChatGPT / Perplexity)</text>
 
@@ -1140,42 +1268,234 @@
                         <text x="200" y="496" text-anchor="middle" font-size="12" fill="#161718">Intent Analysis</text>
                     </g>
 
-                    <line x1="200" y1="514" x2="200" y2="540" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
+                    <line x1="200" y1="514" x2="200" y2="535" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
 
+                    <!-- ── MCP DECISION DIAMOND ── -->
+                    <g class="pnode" data-ptip="mcp-check">
+                        <polygon points="200,535 270,567 200,599 130,567" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="200" y="563" text-anchor="middle" font-size="10" fill="#161718">MCP Server</text>
+                        <text x="200" y="575" text-anchor="middle" font-size="10" fill="#161718">Available?</text>
+                    </g>
+
+                    <!-- No branch — straight down to RAG -->
+                    <line x1="200" y1="599" x2="200" y2="650" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
+                    <text x="212" y="628" font-size="11" fill="#7C7D7E">No</text>
+
+                    <!-- Yes branch — far left to MCP Tool Call (outside AI box) -->
+                    <path d="M130,567 L30,567 L30,660" stroke="#e91e8c" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+                    <text x="78" y="558" font-size="11" fill="#e91e8c">Yes</text>
+
+                    <!-- ── YES PATH: MCP Tool Call (far left, outside AI box) ── -->
+                    <g class="pnode" data-ptip="mcp-direct">
+                        <rect x="-14" y="660" width="88" height="62" rx="4" fill="#e91e8c"/>
+                        <text x="30" y="683" text-anchor="middle" font-size="10" font-weight="700" fill="white">MCP Tool</text>
+                        <text x="30" y="696" text-anchor="middle" font-size="10" font-weight="700" fill="white">Call</text>
+                        <text x="30" y="714" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.75)">(live data)</text>
+                    </g>
+
+                    <!-- MCP path bypasses RAG+TopSource → goes directly to Answer Synthesis -->
+                    <path d="M30,722 L30,915 L85,915" stroke="#e91e8c" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+
+                    <!-- ── NO PATH: RAG flow (shifted +110px) ── -->
                     <g class="pnode" data-ptip="rag">
-                        <rect x="85" y="540" width="230" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
-                        <text x="200" y="559" text-anchor="middle" font-size="11" fill="#161718">RAG — Retrieval Augmented</text>
-                        <text x="200" y="574" text-anchor="middle" font-size="11" fill="#161718">Generation</text>
+                        <rect x="85" y="650" width="230" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="200" y="669" text-anchor="middle" font-size="11" fill="#161718">RAG — Retrieval Augmented</text>
+                        <text x="200" y="684" text-anchor="middle" font-size="11" fill="#161718">Generation</text>
                     </g>
 
                     <!-- RAG → Vector DB: route below Standard Indexing to avoid overlap -->
-                    <path d="M315,562 L365,562 L365,688 L473,688" stroke="#464748" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+                    <path d="M315,672 L365,672 L365,688 L473,688" stroke="#464748" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
 
-                    <!-- Vector DB → Top Source Selection (cross-section, green dashed) -->
-                    <path d="M473,705 L295,705" stroke="#464748" stroke-width="1.5" fill="none"  marker-end="url(#arr)"/>
+                    <!-- Vector DB → Top Source Selection (cross-section) -->
+                    <path d="M473,705 L380,705 L380,822 L295,822" stroke="#464748" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
 
                     <g class="pnode" data-ptip="top-source">
-                        <rect x="105" y="690" width="190" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
-                        <text x="200" y="711" text-anchor="middle" font-size="12" fill="#161718">Top Source Selection</text>
+                        <rect x="105" y="800" width="190" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="200" y="826" text-anchor="middle" font-size="12" fill="#161718">Top Source Selection</text>
                     </g>
 
-                    <line x1="200" y1="733" x2="200" y2="783" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
+                    <line x1="200" y1="844" x2="200" y2="893" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
 
+                    <!-- ── MERGED: Answer Synthesis ── -->
                     <g class="pnode" data-ptip="answer-synth">
-                        <rect x="85" y="783" width="230" height="44" rx="4" fill="#78FAAE"/>
-                        <text x="200" y="802" text-anchor="middle" font-size="11" font-weight="700" fill="#0E3A2F">Answer Synthesis</text>
-                        <text x="200" y="817" text-anchor="middle" font-size="11" font-weight="700" fill="#0E3A2F">with Citations</text>
+                        <rect x="85" y="893" width="230" height="44" rx="4" fill="#78FAAE"/>
+                        <text x="200" y="912" text-anchor="middle" font-size="11" font-weight="700" fill="#0E3A2F">Answer Synthesis</text>
+                        <text x="200" y="927" text-anchor="middle" font-size="11" font-weight="700" fill="#0E3A2F">with Citations</text>
                     </g>
 
-                    <line x1="200" y1="827" x2="200" y2="887" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
+                    <line x1="200" y1="937" x2="200" y2="997" stroke="#464748" stroke-width="1.5" marker-end="url(#arr)"/>
 
                     <g class="pnode" data-ptip="user-response">
-                        <circle cx="200" cy="917" r="30" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
-                        <text x="200" y="912" text-anchor="middle" font-size="11" fill="#464748">User</text>
-                        <text x="200" y="926" text-anchor="middle" font-size="11" fill="#464748">Response</text>
+                        <circle cx="200" cy="1027" r="30" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                        <text x="200" y="1022" text-anchor="middle" font-size="11" fill="#464748">User</text>
+                        <text x="200" y="1036" text-anchor="middle" font-size="11" fill="#464748">Response</text>
                     </g>
 
                 </svg>
+            </div>
+
+            <!-- ═══ MCP SERVER PROCESS MAP ═══ -->
+            <div style="margin-top:72px; border-top:2px solid var(--border); padding-top:56px;">
+                <div class="process-header">
+                    <h2>With Certified MCP Server — Direct AI Pipeline</h2>
+                    <p>When a company runs a certified MCP server, AI agents skip the entire crawl/index pipeline and get real-time structured data directly. Hover over any node for an explanation.</p>
+                </div>
+                <div class="process-svg-wrap">
+                    <svg viewBox="0 0 860 980" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter',sans-serif">
+                        <defs>
+                            <marker id="arr2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                                <polygon points="0 0, 8 3, 0 6" fill="#464748"/>
+                            </marker>
+                            <marker id="arr2-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                                <polygon points="0 0, 8 3, 0 6" fill="#31694B"/>
+                            </marker>
+                            <marker id="arr2-mcp" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                                <polygon points="0 0, 8 3, 0 6" fill="#e91e8c"/>
+                            </marker>
+                        </defs>
+
+                        <!-- ══════════════════════════════════════════ -->
+                        <!-- COMPANY — MCP Server Provider             -->
+                        <!-- ══════════════════════════════════════════ -->
+                        <rect x="150" y="8" width="560" height="280" rx="8" fill="#F4F6F5" stroke="#E4E4E4" stroke-width="1.5"/>
+                        <text x="430" y="27" text-anchor="middle" font-size="10" font-weight="700" fill="#7C7D7E" letter-spacing="1.5">COMPANY (MCP Server Provider)</text>
+
+                        <g class="pnode" data-ptip="mcp-data-source">
+                            <circle cx="430" cy="68" r="35" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                            <text x="430" y="63" text-anchor="middle" font-size="11" fill="#464748">Business</text>
+                            <text x="430" y="78" text-anchor="middle" font-size="11" fill="#464748">Data</text>
+                        </g>
+
+                        <line x1="430" y1="103" x2="430" y2="123" stroke="#464748" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+                        <g class="pnode" data-ptip="mcp-server">
+                            <rect x="305" y="123" width="250" height="48" rx="4" fill="#e91e8c"/>
+                            <text x="430" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="white">Certified MCP Server</text>
+                            <text x="430" y="161" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">Model Context Protocol</text>
+                        </g>
+
+                        <line x1="430" y1="171" x2="430" y2="195" stroke="#464748" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+                        <g class="pnode" data-ptip="mcp-tools">
+                            <rect x="295" y="195" width="270" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                            <text x="430" y="214" text-anchor="middle" font-size="11" fill="#161718">Tool Registration</text>
+                            <text x="430" y="229" text-anchor="middle" font-size="10" fill="#7C7D7E">(products, prices, inventory, booking...)</text>
+                        </g>
+
+                        <line x1="430" y1="239" x2="430" y2="257" stroke="#464748" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+                        <g class="pnode" data-ptip="mcp-schema">
+                            <rect x="310" y="257" width="240" height="26" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                            <text x="430" y="274" text-anchor="middle" font-size="10" fill="#161718">Structured Input/Output Schema</text>
+                        </g>
+
+                        <!-- ══════════════════════════════════════════════════════ -->
+                        <!-- MCP REGISTRY / CERTIFICATION                         -->
+                        <!-- ══════════════════════════════════════════════════════ -->
+                        <rect x="255" y="305" width="350" height="155" rx="8" fill="#FFF7ED" stroke="#F5C87A" stroke-width="1.5"/>
+                        <text x="430" y="324" text-anchor="middle" font-size="10" font-weight="700" fill="#B8860B" letter-spacing="1.5">MCP REGISTRY / CERTIFICATION</text>
+
+                        <line x1="430" y1="283" x2="430" y2="340" stroke="#464748" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+                        <g class="pnode" data-ptip="mcp-discovery">
+                            <rect x="335" y="340" width="190" height="36" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                            <text x="430" y="362" text-anchor="middle" font-size="11" fill="#161718">Server Discovery</text>
+                        </g>
+
+                        <line x1="430" y1="376" x2="430" y2="395" stroke="#464748" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+                        <g class="pnode" data-ptip="mcp-auth">
+                            <polygon points="430,395 499,422 430,449 361,422" fill="white" stroke="#F5C87A" stroke-width="1.5"/>
+                            <text x="430" y="420" text-anchor="middle" font-size="10" fill="#161718">Certified?</text>
+                            <text x="430" y="434" text-anchor="middle" font-size="9" fill="#7C7D7E">Auth &amp; Trust</text>
+                        </g>
+
+                        <!-- Yes branch — down (main flow) -->
+                        <line x1="430" y1="449" x2="430" y2="488" stroke="#31694B" stroke-width="2" marker-end="url(#arr2-green)"/>
+                        <text x="448" y="472" font-size="11" fill="#31694B" font-weight="600">Yes</text>
+
+                        <!-- No branch — right, connects to "Fallback" -->
+                        <path d="M499,422 L660,422 L660,488" stroke="#e91e8c" stroke-width="1.5" stroke-dasharray="6,4" fill="none" marker-end="url(#arr2-mcp)"/>
+                        <text x="575" y="414" text-anchor="middle" font-size="11" fill="#e91e8c">No</text>
+
+                        <g class="pnode" data-ptip="mcp-fallback">
+                            <rect x="575" y="488" width="170" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                            <text x="660" y="508" text-anchor="middle" font-size="11" fill="#161718">Fallback to</text>
+                            <text x="660" y="522" text-anchor="middle" font-size="11" fill="#161718">Web Crawling</text>
+                        </g>
+
+                        <text x="660" y="550" text-anchor="middle" font-size="9" fill="#7C7D7E">(classic GEO pipeline ↑)</text>
+
+                        <!-- ══════════════════════════════════════════════════════ -->
+                        <!-- AI AGENT (with MCP support)                           -->
+                        <!-- ══════════════════════════════════════════════════════ -->
+                        <rect x="120" y="488" width="420" height="480" rx="8" fill="#F4F6F5" stroke="#E4E4E4" stroke-width="1.5"/>
+                        <text x="330" y="507" text-anchor="middle" font-size="10" font-weight="700" fill="#7C7D7E" letter-spacing="1.2">AI AGENT (with MCP support)</text>
+                        <text x="330" y="521" text-anchor="middle" font-size="9" fill="#AAAAAA">(Claude / ChatGPT / Perplexity)</text>
+
+                        <g class="pnode" data-ptip="mcp-user-query">
+                            <circle cx="330" cy="560" r="30" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                            <text x="330" y="555" text-anchor="middle" font-size="11" fill="#464748">User</text>
+                            <text x="330" y="569" text-anchor="middle" font-size="11" fill="#464748">Query</text>
+                        </g>
+
+                        <line x1="330" y1="590" x2="330" y2="610" stroke="#464748" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+                        <g class="pnode" data-ptip="mcp-intent">
+                            <rect x="235" y="610" width="190" height="38" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                            <text x="330" y="633" text-anchor="middle" font-size="12" fill="#161718">Intent Analysis</text>
+                        </g>
+
+                        <line x1="330" y1="648" x2="330" y2="668" stroke="#464748" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+                        <g class="pnode" data-ptip="mcp-tool-select">
+                            <rect x="215" y="668" width="230" height="44" rx="4" fill="#e91e8c"/>
+                            <text x="330" y="688" text-anchor="middle" font-size="11" font-weight="700" fill="white">MCP Tool Discovery</text>
+                            <text x="330" y="703" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">"What tools can I call?"</text>
+                        </g>
+
+                        <line x1="330" y1="712" x2="330" y2="732" stroke="#464748" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+                        <g class="pnode" data-ptip="mcp-tool-call">
+                            <rect x="215" y="732" width="230" height="44" rx="4" fill="#e91e8c"/>
+                            <text x="330" y="751" text-anchor="middle" font-size="11" font-weight="700" fill="white">Direct Tool Call</text>
+                            <text x="330" y="766" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">get_product(id="kodiaq-2025")</text>
+                        </g>
+
+                        <!-- Arrow back up to MCP Server (bidirectional) -->
+                        <path d="M215,752 L155,752 L155,147 L305,147" stroke="#e91e8c" stroke-width="2" stroke-dasharray="8,4" fill="none" marker-end="url(#arr2-mcp)"/>
+                        <text x="140" y="450" text-anchor="middle" font-size="9" fill="#e91e8c" transform="rotate(-90,140,450)">MCP Protocol (JSON-RPC)</text>
+
+                        <!-- Response arrow from MCP Server back -->
+                        <path d="M305,155 L170,155 L170,800 L215,800" stroke="#31694B" stroke-width="2" stroke-dasharray="8,4" fill="none" marker-end="url(#arr2-green)"/>
+                        <text x="155" y="550" text-anchor="middle" font-size="9" fill="#31694B" transform="rotate(-90,155,550)">Structured Response (real-time)</text>
+
+                        <line x1="330" y1="776" x2="330" y2="790" stroke="#464748" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+                        <g class="pnode" data-ptip="mcp-response">
+                            <rect x="205" y="790" width="250" height="44" rx="4" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                            <text x="330" y="810" text-anchor="middle" font-size="11" fill="#161718">Structured Data Response</text>
+                            <text x="330" y="824" text-anchor="middle" font-size="10" fill="#7C7D7E">(JSON, real-time, no hallucination)</text>
+                        </g>
+
+                        <line x1="330" y1="834" x2="330" y2="860" stroke="#464748" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+                        <g class="pnode" data-ptip="mcp-synthesis">
+                            <rect x="205" y="860" width="250" height="44" rx="4" fill="#78FAAE"/>
+                            <text x="330" y="879" text-anchor="middle" font-size="11" font-weight="700" fill="#0E3A2F">Answer Synthesis</text>
+                            <text x="330" y="894" text-anchor="middle" font-size="11" font-weight="700" fill="#0E3A2F">with Live Data</text>
+                        </g>
+
+                        <line x1="330" y1="904" x2="330" y2="930" stroke="#464748" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+                        <g class="pnode" data-ptip="mcp-user-response">
+                            <circle cx="330" cy="950" r="30" fill="white" stroke="#C8C8C8" stroke-width="1.5"/>
+                            <text x="330" y="945" text-anchor="middle" font-size="11" fill="#464748">User</text>
+                            <text x="330" y="959" text-anchor="middle" font-size="11" fill="#464748">Response</text>
+                        </g>
+
+                    </svg>
+                </div>
             </div>
 
             <div style="margin-top:56px;">
@@ -1191,7 +1511,7 @@
     </div>
 
     <!-- ROBOTS.TXT VIEW -->
-    <div id="robots-view" style="display:none; position:fixed; top:64px; left:0; right:0; bottom:0; background:var(--bg); overflow-y:auto;">
+    <div id="robots-view" style="display:none; position:fixed; top:104px; left:0; right:0; bottom:0; background:var(--bg); overflow-y:auto;">
         <div style="max-width:780px; margin:0 auto; padding:48px 40px 160px;">
 
             <div style="margin-bottom:40px;">
@@ -1220,7 +1540,17 @@ Disallow: *?*sort=
 Disallow: *?*filter=
 
 # Sitemap location
-Sitemap: https://www.yourdomain.com/sitemap.xml</textarea>
+Sitemap: https://www.yourdomain.com/sitemap.xml
+
+# Allow for real-time search in ChatGPT (GEO)
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /libs/ # Still maintaining AEM protection
+
+# Allow for training of future GPT models
+User-agent: GPTBot
+Allow: /
+Disallow: /libs/</textarea>
             </div>
 
             <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
@@ -1399,7 +1729,43 @@ Sitemap: https://www.yourdomain.com/sitemap.xml</textarea>
                 title: 'Inline Microdata for AI Parsing',
                 body: 'GEO uses <strong>microdata directly in HTML</strong> with explicit facts ("€34,990", "910 l", "5/5 stars"). AI crawlers like Perplexity read these attributes.',
                 vs: 'SEO uses <strong>JSON-LD in the header</strong> — Google reads that, but AI models typically parse visible page content, not header scripts.'
-            }
+            },
+            'geo-advantages': {
+                type: 'geo',
+                title: 'Benefit-Oriented Section Heading',
+                body: 'GEO content explicitly lists <strong>measurable advantages</strong> — specific numbers, comparisons, and real-world scenarios. AI models prioritize content that directly answers "why should I buy X?" with concrete data points rather than vague marketing claims.',
+                vs: 'SEO might use a heading like "Features" or "Highlights" — optimized for keyword matching. GEO headings frame the question the user is actually asking.'
+            },
+            'geo-adv-detail': {
+                type: 'geo',
+                title: 'Quantified Competitive Advantages',
+                body: 'Each advantage includes a <strong>specific number and a comparison</strong>: "910 l — 47% more than Tucson", "€0.52/km vs €0.58/km". AI models can extract these as atomic facts and use them in comparative answers. Vague statements like "spacious interior" are much less likely to be cited.',
+                vs: 'SEO content often lists features without comparative context. GEO content makes every claim verifiable and comparable.'
+            },
+            'geo-usecases': {
+                type: 'geo',
+                title: 'Scenario-Based Recommendations',
+                body: 'AI assistants frequently receive questions like <strong>"Which car is best for a family of 5?"</strong> or "What SUV for towing a caravan?" By structuring content as buyer profiles with specific recommendations, the page directly maps to these query patterns.',
+                vs: 'SEO content typically describes trims generically. GEO content pre-answers the exact questions users ask AI assistants.'
+            },
+            'geo-scenarios': {
+                type: 'geo',
+                title: 'Configuration Matrix by Use Case',
+                body: 'A <strong>structured table mapping buyer profiles to configurations</strong> is extremely AI-friendly. When a user asks "Which Kodiaq for long commutes?", the AI can directly extract the row: L&K 2.0 TDI AWD, 6.3 l/100 km, ergoActive seats, adaptive cruise.',
+                vs: 'SEO content might have a trim comparison page. GEO content structures the same data by user intent, not by product hierarchy.'
+            },
+            'geo-tech': {
+                type: 'geo',
+                title: 'Feature Deep-Dive with Context',
+                body: 'Technology sections in GEO content go beyond spec lists — they explain <strong>what each feature does in practice</strong>. "Turn Assist prevents collisions when turning left across traffic" is more citable than "Turn Assist: included".',
+                vs: 'SEO spec lists are optimized for scanability. GEO descriptions are optimized for AI comprehension and answer synthesis.'
+            },
+            'geo-tech-detail': {
+                type: 'geo',
+                title: 'Categorized Feature Breakdown',
+                body: 'Grouping features by <strong>category (assistance, comfort, towing)</strong> helps AI models understand context. When a user asks about towing capability, the AI can retrieve the entire "Towing & Utility" section as a coherent chunk rather than scattered specs.',
+                vs: 'SEO pages often have one long spec table. GEO content segments features into semantically meaningful groups that align with how users ask questions.'
+            },
         };
 
         const tooltipEl = document.getElementById('tooltip');
@@ -1634,6 +2000,72 @@ Sitemap: https://www.yourdomain.com/sitemap.xml</textarea>
             'user-response': {
                 title: 'User Response',
                 body: 'The user receives an AI-generated answer, potentially with your website cited as a source. This is the GEO equivalent of a top SERP position — direct, visible presence in AI-mediated answers.'
+            },
+            // ── MCP CHECK (in first pipeline) ──
+            'mcp-check': {
+                title: 'MCP Server Available?',
+                body: 'After analyzing user intent, the AI checks whether a registered MCP (Model Context Protocol) server exists for the relevant domain. If yes, the AI can skip the crawled RAG pipeline entirely and call the MCP server directly for real-time, structured data. If no MCP server is available, the standard RAG retrieval path is used.'
+            },
+            'mcp-direct': {
+                title: 'MCP Tool Call (Live Data)',
+                body: 'When an MCP server is available, the AI agent calls it directly via JSON-RPC — e.g. get_product(id="kodiaq-2025"). This bypasses web crawling, indexing, and RAG retrieval entirely. The response contains real-time structured data straight from the source — current prices, live inventory, up-to-date specs. No stale index, no hallucination risk.'
+            },
+            // ── MCP SERVER PROCESS MAP ──
+            'mcp-data-source': {
+                title: 'Business Data',
+                body: 'Firemní data — produktový katalog, ceník, skladové zásoby, rezervační systém, FAQ, dokumentace. Toto je autoritativní zdroj pravdy, který firma spravuje a aktualizuje v reálném čase.'
+            },
+            'mcp-server': {
+                title: 'Certifikovaný MCP Server',
+                body: 'Model Context Protocol (MCP) server běžící v infrastruktuře firmy. Vystavuje firemní data jako sadu "nástrojů" (tools), které mohou AI agenti volat přímo — bez crawlování, bez indexování, bez zpoždění. Certifikace znamená, že server splňuje bezpečnostní a kvalitativní standardy.'
+            },
+            'mcp-tools': {
+                title: 'Tool Registration',
+                body: 'MCP server registruje jednotlivé nástroje — každý s jasným názvem, popisem a vstupně-výstupním schématem. Např. get_product(id), search_inventory(query), check_availability(date). AI agent přesně ví, co může volat a jaká data dostane zpět.'
+            },
+            'mcp-schema': {
+                title: 'Structured Input/Output Schema',
+                body: 'Každý MCP tool má definované JSON schéma pro vstup i výstup. AI agent tak přesně ví, jaké parametry poslat a v jakém formátu dostane odpověď. Žádné hádání, žádná interpretace nestrukturovaného textu.'
+            },
+            'mcp-discovery': {
+                title: 'Server Discovery',
+                body: 'AI agent objeví dostupné MCP servery — buď přes centrální registr, přes konfiguraci, nebo přes doménový záznam. Podobně jako DNS pro weby, ale pro AI nástroje.'
+            },
+            'mcp-auth': {
+                title: 'Certifikace & Autorizace',
+                body: 'Před připojením se ověřuje: Je server certifikovaný? Má platný certifikát? Jsou data důvěryhodná? Jen certifikované servery získají přímý přístup do AI pipeline. Necertifikované se vrací ke klasickému web crawlingu.'
+            },
+            'mcp-fallback': {
+                title: 'Fallback na Web Crawling',
+                body: 'Pokud MCP server není certifikovaný nebo selže ověření, AI agent se vrátí ke klasické GEO pipeline — crawlování webu, indexování, RAG. Pomalejší, méně přesné, ale stále funkční.'
+            },
+            'mcp-user-query': {
+                title: 'Dotaz Uživatele',
+                body: 'Uživatel položí otázku AI agentovi — např. "Kolik stojí Škoda Kodiaq 2025 v L&K výbavě?" Agent analyzuje dotaz a rozhodne, zda může použít MCP tool pro přímou odpověď.'
+            },
+            'mcp-intent': {
+                title: 'Analýza Intentu',
+                body: 'AI agent klasifikuje záměr dotazu a identifikuje entity. Rozhodne, jestli potřebuje strukturovaná data (→ MCP tool call) nebo obecné znalosti (→ RAG/knowledge base).'
+            },
+            'mcp-tool-select': {
+                title: 'MCP Tool Discovery',
+                body: 'Agent se podívá na seznam dostupných MCP nástrojů a jejich schémata. Vybere ten nejvhodnější pro daný dotaz — např. get_product pro detail auta, search_inventory pro dostupnost, get_pricing pro ceník.'
+            },
+            'mcp-tool-call': {
+                title: 'Přímé Volání Tool',
+                body: 'Agent zavolá konkrétní MCP tool se strukturovanými parametry — např. get_product(id="kodiaq-2025", trim="laurin-klement"). Komunikace probíhá přes JSON-RPC protokol. Žádné parsování HTML, žádné hádání z textu.'
+            },
+            'mcp-response': {
+                title: 'Strukturovaná Odpověď',
+                body: 'MCP server vrátí čistá strukturovaná data v reálném čase — aktuální cena, skladová dostupnost, specifikace. Data jsou vždy čerstvá (ne měsíce stará kopie z indexu) a přesná (ne extrahovaná z nestrukturovaného textu).'
+            },
+            'mcp-synthesis': {
+                title: 'Syntéza Odpovědi s Live Daty',
+                body: 'AI agent sestaví odpověď z živých firemních dat. Výsledek: přesná cena k dnešnímu dni, reálná dostupnost, aktuální konfigurátor. Žádné halucinace — data jsou přímo od zdroje, ne interpretovaná z webu.'
+            },
+            'mcp-user-response': {
+                title: 'Odpověď Uživateli',
+                body: 'Uživatel dostane odpověď s přesnými, aktuálními daty přímo od firmy. MCP citace je transparentní — uživatel ví, že data pocházejí z ověřeného firemního zdroje, ne z náhodného webu.'
             }
         };
 
@@ -1669,11 +2101,15 @@ Sitemap: https://www.yourdomain.com/sitemap.xml</textarea>
             el.addEventListener('mouseleave', hidePTip);
         });
 
+        // Track current sub-view
+        let currentSubView = 'onsite';
+
         function switchView(view) {
             const splitEl = document.querySelector('.split-container');
             const dividerEl = document.querySelector('.divider');
             const processEl = document.getElementById('process-view');
             const robotsEl = document.getElementById('robots-view');
+            const offsiteEl = document.getElementById('offsite-view');
             const tabSeo = document.getElementById('tab-seogeo');
             const tabProc = document.getElementById('tab-process');
             const tabRobots = document.getElementById('tab-robots');
@@ -1682,6 +2118,7 @@ Sitemap: https://www.yourdomain.com/sitemap.xml</textarea>
             dividerEl.style.display = 'none';
             processEl.style.display = 'none';
             robotsEl.style.display = 'none';
+            offsiteEl.style.display = 'none';
             tabSeo.classList.remove('view-tab-active');
             tabProc.classList.remove('view-tab-active');
             tabRobots.classList.remove('view-tab-active');
@@ -1699,9 +2136,48 @@ Sitemap: https://www.yourdomain.com/sitemap.xml</textarea>
             }
         }
 
-        document.getElementById('tab-seogeo').addEventListener('click', () => switchView('seogeo'));
-        document.getElementById('tab-process').addEventListener('click', () => switchView('process'));
-        document.getElementById('tab-robots').addEventListener('click', () => switchView('robots'));
+        function switchSubView(sub) {
+            currentSubView = sub;
+            const subtabOn = document.getElementById('subtab-onsite');
+            const subtabOff = document.getElementById('subtab-offsite');
+            const offsiteEl = document.getElementById('offsite-view');
+            const splitEl = document.querySelector('.split-container');
+            const dividerEl = document.querySelector('.divider');
+
+            // Reset sub-tabs
+            subtabOn.classList.remove('sub-tab-active');
+            subtabOff.classList.remove('sub-tab-active');
+
+            if (sub === 'onsite') {
+                subtabOn.classList.add('sub-tab-active');
+                offsiteEl.style.display = 'none';
+                // Restore the main view (re-trigger current top tab)
+                const activeTab = document.querySelector('.view-tab.view-tab-active');
+                if (activeTab === document.getElementById('tab-seogeo')) {
+                    splitEl.style.display = 'flex';
+                    dividerEl.style.display = 'block';
+                } else if (activeTab === document.getElementById('tab-process')) {
+                    document.getElementById('process-view').style.display = 'block';
+                } else if (activeTab === document.getElementById('tab-robots')) {
+                    document.getElementById('robots-view').style.display = 'block';
+                }
+            } else {
+                subtabOff.classList.add('sub-tab-active');
+                // Hide all on-site views
+                splitEl.style.display = 'none';
+                dividerEl.style.display = 'none';
+                document.getElementById('process-view').style.display = 'none';
+                document.getElementById('robots-view').style.display = 'none';
+                // Show off-site
+                offsiteEl.style.display = 'block';
+            }
+        }
+
+        document.getElementById('tab-seogeo').addEventListener('click', () => { switchSubView('onsite'); switchView('seogeo'); });
+        document.getElementById('tab-process').addEventListener('click', () => { switchSubView('onsite'); switchView('process'); });
+        document.getElementById('tab-robots').addEventListener('click', () => { switchSubView('onsite'); switchView('robots'); });
+        document.getElementById('subtab-onsite').addEventListener('click', () => switchSubView('onsite'));
+        document.getElementById('subtab-offsite').addEventListener('click', () => switchSubView('offsite'));
     </script>
 
 </body>
